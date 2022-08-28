@@ -10,10 +10,10 @@ The app should consist only of a frontend. It should work in Görli and with Met
 
 The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
 
-
 ## Stack and tools
 
 The only two requirements are:
+
 1. Use React for the frontend
 2. Use [web3.js](https://web3js.readthedocs.io/) and [ethers.js](https://docs.ethers.io/). The user should be able to switch between the two libraries and everything should work the same.
 
