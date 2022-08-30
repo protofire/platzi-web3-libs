@@ -1,5 +1,6 @@
-import { ethers, Signer } from 'ethers'
-import { Proposal } from '../types'
+import { ethers } from 'ethers'
+import { Web3Provider, TransactionResponse } from '@ethersproject/providers'
+import { Proposal, Vote } from '../types'
 import { PROPOSAL_ADDRESS, SupportedChainId } from '../constants'
 
 // A Human-Readable ABI; for interacting with the contract, we
@@ -22,11 +23,11 @@ const abi = [
 export class EthersProposal<T extends SupportedChainId> implements Proposal {
   private proposalContract: ethers.Contract
 
-  constructor(public chainId: T, signer: Signer) {
+  constructor(public chainId: T, provider: Web3Provider) {
     this.proposalContract = new ethers.Contract(
       PROPOSAL_ADDRESS[chainId],
       abi,
-      signer
+      provider.getSigner()
     )
   }
 
@@ -48,5 +49,20 @@ export class EthersProposal<T extends SupportedChainId> implements Proposal {
   async VOTE_FEE(): Promise<string> {
     const VOTE_FEE = await this.proposalContract.VOTE_FEE()
     return ethers.utils.formatEther(VOTE_FEE)
+  }
+
+  async getVote(): Promise<Vote | undefined> {
+    const address = await this.proposalContract.signer.getAddress()
+    const vote = await this.proposalContract.getVote(address)
+    return vote.toNumber() || undefined
+  }
+
+  async vote(vote: Vote): Promise<string> {
+    const fee = await this.VOTE_FEE()
+    const tx: TransactionResponse = await this.proposalContract.vote(vote, {
+      value: ethers.utils.parseEther(fee),
+    })
+
+    return tx.hash
   }
 }
