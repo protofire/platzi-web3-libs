@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { ethers, Signer } from 'ethers'
 import { Proposal } from '../types'
 import { PROPOSAL_ADDRESS, SupportedChainId } from '../constants'
 
@@ -22,15 +22,11 @@ const abi = [
 export class EthersProposal<T extends SupportedChainId> implements Proposal {
   private proposalContract: ethers.Contract
 
-  constructor(public chainId: T) {
-    const provider = new ethers.providers.InfuraProvider(
-      chainId,
-      process.env.REACT_APP_INFURA_KEY
-    )
+  constructor(public chainId: T, signer: Signer) {
     this.proposalContract = new ethers.Contract(
       PROPOSAL_ADDRESS[chainId],
       abi,
-      provider
+      signer
     )
   }
 

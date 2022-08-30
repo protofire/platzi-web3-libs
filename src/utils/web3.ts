@@ -1,17 +1,17 @@
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import { Contract } from 'web3-eth-contract'
-import { getInfuraUrl, PROPOSAL_ADDRESS, SupportedChainId } from '../constants'
+import { provider } from 'web3-core'
+import { PROPOSAL_ADDRESS, SupportedChainId } from '../constants'
 import abi from '../constants/proposal-abi.json'
 import { Proposal } from '../types'
 
 export class Web3Proposal<T extends SupportedChainId> implements Proposal {
   private proposalContract: Contract
 
-  constructor(public chainId: T) {
+  constructor(public chainId: T, signer: provider) {
     const contractAddress = PROPOSAL_ADDRESS[chainId]
-    const providerUrl = getInfuraUrl(chainId)
-    const web3 = new Web3(providerUrl)
+    const web3 = new Web3(signer)
     this.proposalContract = new web3.eth.Contract(
       abi as AbiItem[],
       contractAddress
