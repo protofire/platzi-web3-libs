@@ -25,7 +25,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
-    <App />
+      <App />
     </Web3ReactProvider>
   </React.StrictMode>
 );
