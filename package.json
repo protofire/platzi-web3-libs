@@ -1,0 +1,32 @@
+{
+  "name": "platzi-web3-libs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.3.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "dotenv": "^16.0.2",
+    "ethers": "^5.7.0",
+    "framer-motion": "^6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web3": "^1.7.5",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/node": "^18.7.14",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.1",
+    "typescript": "^4.8.2",
+    "vite": "^3.0.7"
+  }
+}
