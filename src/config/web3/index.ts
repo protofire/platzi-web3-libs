@@ -3,7 +3,7 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
 
-const GOERLI_NETWORK = 5
+export const GOERLI_NETWORK = 5
 
 export const connector = new InjectedConnector({
   supportedChainIds:[

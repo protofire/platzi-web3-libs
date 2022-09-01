@@ -9,7 +9,7 @@ export const Home: FC = () => {
 
   const getVotes = useCallback(async () => {
     if(proposalContract) {
-      const votesForNo = await proposalContract.methods.votesForNo().call() // read
+      const votesForNo = await proposalContract.methods.votesForNo().call()
       setVoteNo(votesForNo)
       const votesForYes = await proposalContract.methods.votesForYes().call() // read
       setVoteYes(votesForYes)

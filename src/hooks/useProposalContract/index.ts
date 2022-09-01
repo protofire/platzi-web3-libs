@@ -1,10 +1,9 @@
 import { useMemo } from 'react'
 import {useWeb3React } from '@web3-react/core'
-import { ProposalContractABI } from '../../config/artifacts'
+import { ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI } from '../../config/artifacts'
 import { Providers } from '../../config/web3'
 
-
-const { address, abi } = ProposalContractABI
+const abi = ProposalContractABI
 
 export const useProposalContract = () => {
   const { 
@@ -12,10 +11,10 @@ export const useProposalContract = () => {
   } = useWeb3React<Providers>()
   const contract  = useMemo(
     () => {
-      if (active && library)
-        return new library.web3Library.eth.Contract(abi, address[5])
+      if (active && library && chainId)
+        return new library.web3Library.eth.Contract(abi, PROPOSAL_CONTRACT_ADDRESS_GOERLI)
     },
-    [ active, chainId, library?.web3Library.eth.Contract, address ]
+    [ active, chainId, library?.web3Library.eth.Contract, PROPOSAL_CONTRACT_ADDRESS_GOERLI]
   )
 
   return contract
