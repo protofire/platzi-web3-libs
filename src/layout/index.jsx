@@ -2,8 +2,6 @@ import {
   Box,
   Flex,
   HStack,
-  IconButton,
-  useDisclosure,
   useColorModeValue,
   Stack,
   Image,
@@ -13,21 +11,16 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import NavLink from "@layout/NavLink";
 import Footer from "@layout/Footer";
 import Wallet from "@layout/Wallet";
+import Logo from "../static/platzi.svg";
 
 const Links = [
   {
     name: "Home",
     to: "/",
   },
-  {
-    name: "Punks",
-    to: "/punks",
-  },
 ];
 
 const Layout = ({ children }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Flex minH="100vh" direction="column">
       <Box
@@ -49,18 +42,11 @@ const Layout = ({ children }) => {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
           <HStack spacing={8} alignItems={"center"}>
             <Flex alignItems="center">
-              <Image src="./images/platzi.svg" width="80px" />
-              <Heading size="md" color="purple" mt={0.2} ml={1}>
-                Punks
+              <Image src={Logo.src} width="80px" />
+              <Heading size="md" color="blue.200" mt={0.2} ml={1}>
+                Challenge
               </Heading>
             </Flex>
             <HStack
@@ -77,18 +63,6 @@ const Layout = ({ children }) => {
           </HStack>
           <Wallet />
         </Flex>
-
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Links.map(({ name, to }) => (
-                <NavLink key={name} to={to}>
-                  {name}
-                </NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
       </Box>
       <Box mx="auto" flex={1} p={4} maxW={"7xl"} width="100%">
         {children}

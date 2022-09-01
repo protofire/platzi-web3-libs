@@ -9,11 +9,14 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { connector } from "@connectors/index";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useTruncatedAddress from "@hooks/useTruncatedAddress";
+import { ethers } from "ethers";
+import { AppContext } from "@context/AppContext";
 
 const Wallet = () => {
   const [balance, setBalance] = useState(0);
+  const { state } = useContext(AppContext);
   const { active, activate, deactivate, account, error, library } =
     useWeb3React();
 
@@ -30,7 +33,13 @@ const Wallet = () => {
   };
 
   const getBalance = useCallback(async () => {
-    const toSet = await library.web3.eth.getBalance(account);
+    let toSet = 0;
+    if (state.library === "web3") {
+      toSet = await library.web3.eth.getBalance(account);
+    } else {
+      toSet = await library.ethers.getBalance(account);
+    }
+
     setBalance((toSet / 1e18).toFixed(2));
   }, [library?.web3.eth, account]);
 
@@ -47,7 +56,7 @@ const Wallet = () => {
   return (
     <Flex alignItems={"center"}>
       {active ? (
-        <Tag colorScheme="green" borderRadius="full">
+        <Tag colorScheme="blue" borderRadius="full">
           <TagLabel>{truncatedAddress}</TagLabel>
           <Badge
             d={{
@@ -65,7 +74,7 @@ const Wallet = () => {
       ) : (
         <Button
           variant={"solid"}
-          colorScheme={"green"}
+          colorScheme={"blue"}
           size={"sm"}
           leftIcon={<AddIcon />}
           onClick={connect}
