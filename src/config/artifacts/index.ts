@@ -1,6 +1,6 @@
 import { AbiItem } from 'web3-utils'
 
-const PROPOSAL_CONTRACT_ADDRESS_GOERLI = ''
+const PROPOSAL_CONTRACT_ADDRESS_GOERLI = process.env.PROPOSAL_CONTRACT_ADDRESS_GOERLI
 
 export const ProposalContractABI = {
   address: {

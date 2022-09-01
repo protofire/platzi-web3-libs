@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import {useWeb3React } from '@web3-react/core'
-import { Contract } from 'web3-eth-contract'
 import { ProposalContractABI } from '../../config/artifacts'
 import { Providers } from '../../config/web3'
 
