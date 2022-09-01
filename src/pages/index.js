@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext } from "react";
 import {
   Stack,
   Flex,
@@ -6,7 +6,6 @@ import {
   Text,
   Button,
   Badge,
-  useToast,
   Stat,
   StatLabel,
   StatNumber,
@@ -17,63 +16,16 @@ import {
   Switch,
   FormLabel,
 } from "@chakra-ui/react";
-import Web3Method from "@utils/web3";
-import EthersMethod from "utils/ether";
 import { useWeb3React } from "@web3-react/core";
-import { CheckCircleIcon, CloseIcon, EmailIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 import { AppContext } from "@context/AppContext";
+import useProposalStatus from "@hooks/useProposalStatus";
 
 const Home = () => {
-  const { library, chainId, active } = useWeb3React();
-
+  const { active } = useWeb3React();
   const { state, changeLibrary } = useContext(AppContext);
-
-  const toast = useToast();
-
-  const getData = async () => {
-    if (active) {
-      let web3;
-      if (state.library === "web3") {
-        web3 = new Web3Method(library?.web3.currentProvider, chainId);
-      } else {
-        web3 = new EthersMethod(chainId, library?.ethers);
-      }
-
-      const [votesForYes, votesForNo, voted] = await Promise.all([
-        web3.votesForYes(),
-        web3.votesForNo(),
-        web3.getVote(),
-      ]);
-      setNegativeVotes(votesForNo);
-      setPositiveVotes(votesForYes);
-      setIsVoted(voted !== undefined);
-    }
-  };
-
-  useMemo(() => {
-    getData();
-  }, [library, chainId, active]);
-
-  const handleVote = async (vote) => {
-    setVoting(true);
-    const web3 = new Web3Method(library?.web3.currentProvider, chainId);
-    try {
-      const txHash = await web3.vote(vote);
-      toast({
-        title: "Vote emitted",
-        description: txHash,
-        status: "success",
-      });
-      getData();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: error.message,
-        status: "error",
-      });
-    }
-    setVoting(false);
-  };
+  const { positiveVotes, negativesVotes, voting, handleVote, isVoted } =
+    useProposalStatus();
 
   return (
     <Stack
