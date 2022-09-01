@@ -4,6 +4,7 @@ import EthersMethod from "@utils/ether";
 import Web3Method from "@utils/web3";
 import { useWeb3React } from "@web3-react/core";
 import { useContext, useMemo, useState } from "react";
+import { usePercent } from "./useTruncatedAddress";
 
 const useProposalStatus = () => {
   const { state } = useContext(AppContext);
@@ -65,8 +66,13 @@ const useProposalStatus = () => {
     setVoting(false);
   };
 
+  const percentYes = usePercent(positiveVotes, positiveVotes + negativesVotes);
+  const percentNo = usePercent(negativesVotes, positiveVotes + negativesVotes);
+
   return {
     positiveVotes,
+    percentYes,
+    percentNo,
     negativesVotes,
     voting,
     isVoted,
