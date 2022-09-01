@@ -5,7 +5,7 @@ import Web3 from 'web3'
 
 const GOERLI_NETWORK = 5
 
-const connector = new InjectedConnector({
+export const connector = new InjectedConnector({
   supportedChainIds:[
     GOERLI_NETWORK
   ]
@@ -23,6 +23,3 @@ export const getLibrary = (provider: any):  Providers => {
   return {ethersLibrary, web3Library}
 }
 
-//export const getMultiLibrary = () => {
-//  return useWeb3React<Providers>()
-//}

@@ -4,27 +4,22 @@ import './App.css';
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import {Providers} from './config/web3'
+import { Providers, connector } from './config/web3'
 
 enum ConnectorNames {
   Injected = 'MetaMask',
 }
 
-const injected = new InjectedConnector({
-  supportedChainIds: [5],
-})
-
 const connectorsByName: { [key: string]: AbstractConnector } = {
-  [ConnectorNames.Injected]: injected,
+  [ConnectorNames.Injected]: connector,
 }
 
 function App() {
   const [ balance, setBalance ] = useState(0)
   const { active, error, activate, deactivate, account, library} = useWeb3React<Providers>()
-  const { ethereum } = window as any
   const connect = useCallback(()  => {
     localStorage.setItem('previouslyConnected', 'true')
-    activate(injected)
+    activate(connector)
   }, [activate])
 
   const getBalance = useCallback(async () => {
@@ -52,31 +47,6 @@ function App() {
       connect()
     }
   }, [connect])
-  //if (ethereum && ethereum.on && !active && !error) {
-  //    const handleConnect = () => {
-  //      console.log("Handling 'connect' event")
-  //      activate(injected)
-  //    }
-  //  const handleChainChanged = (chainId: string | number) => {
-  //      console.log("Handling 'chainChanged' event with payload", chainId)
-  //      activate(injected)
-  //    }
-  //  const handleAccountsChanged = (accounts: string[]) => {
-  //     console.log("Handling 'accountsChanged' event with payload", accounts)
-  //     if (accounts.length > 0) {
-  //       activate(injected)
-  //     }
-  //  }
-  //  const handleNetworkChanged = (networkId: string | number) => {
-  //     console.log("Handling 'networkChanged' event with payload", networkId)
-  //     activate(injected)
-  //   }
-
-  //   ethereum.on('connect', handleConnect)
-  //   ethereum.on('chainChanged', handleChainChanged)
-  //   ethereum.on('accountsChanged', handleAccountsChanged)
-  //   ethereum.on('networkChanged', handleNetworkChanged)
-  //}
 
   return (
     <div className="App">
@@ -98,7 +68,6 @@ function App() {
                 </button>
               )
             })
-          //return (  <button key={name} onClick={() => activate(connectorsByName[name], err => console.log)}>Text</button>)
         }
       </header>
     </div>
