@@ -1,3 +1,3 @@
 export interface ConnectorProvider {
-  getProvider(): unknown;
+    getConnectorProvider():any
 }

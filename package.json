@@ -12,16 +12,17 @@
     "@chakra-ui/react": "^2.3.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "dotenv": "^16.0.2",
     "ethers": "^5.7.0",
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "web3": "^1.7.5",
-    "zustand": "^4.1.1"
+    "zustand": "^4.1.1",
+    "zustand-persist": "^0.4.0"
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
+    "dotenv": "^16.0.2",
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",

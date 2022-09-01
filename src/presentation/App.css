@@ -1,0 +1,5 @@
+.normalize {
+  margin: 0;
+  --bs-gutter-y: 0;
+  --bs-gutter-x: 0;
+}
