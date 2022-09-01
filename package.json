@@ -1,0 +1,27 @@
+{
+  "name": "platzi-web3-libs",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:bjvalmaseda-dev/platzi-web3-libs.git",
+  "author": "Bárbaro Javier Valmaseda <hello@bjvalmaseda.com> (https://bjvalmaseda.com/)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.9",
+    "@chakra-ui/react": "^2.3.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "ethers": "^5.7.0",
+    "framer-motion": "^6",
+    "next": "^12.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "web3": "^1.7.5"
+  }
+}
