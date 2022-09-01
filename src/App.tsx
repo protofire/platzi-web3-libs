@@ -5,6 +5,7 @@ import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { Providers, connector } from './config/web3'
+import {Home} from './views/Home'
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -51,6 +52,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Home />
         {
           active ?
             <div>
