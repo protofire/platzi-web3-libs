@@ -4,7 +4,6 @@ import Web3 from 'web3'
 
 const connector = new InjectedConnector({
   supportedChainIds: [
-    4, // Rinkeby
     5,
   ],
 });

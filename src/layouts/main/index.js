@@ -25,7 +25,7 @@ const MainLayout = ({ children }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
   const handleChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
+    localStorage.setItem('choosedLib', event.target.value)
   }
   
 	return (
