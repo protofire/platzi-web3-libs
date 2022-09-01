@@ -4,20 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Web3ReactProvider } from '@web3-react/core'
-import { Web3Provider } from '@ethersproject/providers'
-import Web3 from 'web3'
+import { getLibrary } from './config/web3'
 
-type Providers = {
-  ethersLibrary: Web3Provider,
-  web3Library: Web3
-}
-
-function getLibrary(provider: any):  Providers {
-  const ethersLibrary = new Web3Provider(provider)
-  const web3Library = new Web3(provider)
-  ethersLibrary.pollingInterval = 12000
-  return {ethersLibrary, web3Library}
-}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
