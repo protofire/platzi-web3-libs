@@ -6,7 +6,10 @@
       "@components/*": ["components/*"],
       "@connectors/*": ["connectors/*"],
       "@layout/*": ["layout/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@artifacts/*": ["artifacts/*"],
+      "@utils/*": ["utils/*"],
+      "@context/*": ["context/*"]
     }
   }
 }

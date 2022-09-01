@@ -3,16 +3,19 @@ import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import Web3 from "web3";
 import Layout from "@layout/index";
+import AppContextProvider from "context/AppContext";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <ChakraProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ChakraProvider>
-    </Web3ReactProvider>
+    <AppContextProvider>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <ChakraProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ChakraProvider>
+      </Web3ReactProvider>
+    </AppContextProvider>
   );
 }
 

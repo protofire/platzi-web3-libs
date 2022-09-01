@@ -7,6 +7,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import NextLink from "next/link";
+
 const Footer = () => {
   return (
     <Box
@@ -28,9 +30,9 @@ const Footer = () => {
           align={{ base: "center", md: "center" }}
         >
           <Text>
-            © {new Date().getFullYear()} Original designs by
-            <Link ml={1} href="https://twitter.com/pablostanley">
-              Pablo Stanley 🎨
+            © {new Date().getFullYear()} Made by
+            <Link ml={1} href="https://twitter.com/bjvalmaseda">
+              Bárbaro Javier Valmaseda
             </Link>
           </Text>
         </Container>

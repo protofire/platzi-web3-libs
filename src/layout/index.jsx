@@ -10,7 +10,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import NavLink from "@layout/Footer";
+import NavLink from "@layout/NavLink";
 import Footer from "@layout/Footer";
 import Wallet from "@layout/Wallet";
 
