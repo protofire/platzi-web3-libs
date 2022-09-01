@@ -1,22 +1,42 @@
-# Platzi Web3 Exercise
+# Platzi Web3 Challenge
 
-## Goal
+A #EthDevProgram challenge by Platzi, a DApp that allows people to vote on a (binary) proposal. Each ethereum address should be allowed       to vote only once and the vote should cost 0.01 ETH
 
-Create a DApp that allows people to vote on a (binary) proposal. Each ethereum address should be allowed to vote only once and the vote should cost 0.01 ETH.
+- [Platzi Web3 Challenge](#platzi-web3-challenge)
+  - [Demo](#demo)
+  - [Deploy](#deploy)
+  - [Built with](#built-with)
+  - [Useful resource](#useful-resource)
+  - [License](#license)
+  - [Author](#author)
 
-When a user opens the page, it should see the result so far (number of positive votes vs. number of negative votes). Real-time updating is a bonus, but not required.
-
-The app should consist only of a frontend. It should work in Görli and with MetaMask.
+## Demo
+The app consist only of a frontend. It work in Görli and with MetaMask. 
 
 The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
 
+You can find a demo deployed in [https://web3challenge.bjvalmaseda.xyz] 
 
-## Stack and tools
+!['Dapp Screenshot'](docs/Screenshot%20from%202022-09-01%2019-47-38.png)
 
-The only two requirements are:
-1. Use React for the frontend
-2. Use [web3.js](https://web3js.readthedocs.io/) and [ethers.js](https://docs.ethers.io/). The user should be able to switch between the two libraries and everything should work the same.
+## Deploy
 
-Everything else is up to you. We recommend using [web3-react](https://github.com/NoahZinsmeister/web3-react), but it's not required.
+1. Install all dependencies `yarn`
+2. Build and start a local server `yarn build && yarn start`
+3. Run a development server `yarn dev`
 
-You can get Görli ether [here](https://faucet.paradigm.xyz/).
+## Built with
+- [Next.js](https://nextjs.org/)
+
+## Useful resource
+- [Ethers](https://docs.ethers.io/v5/)
+- [Web3](https://web3js.readthedocs.io/en/v1.7.5/)
+- [Web3-react](https://github.com/Uniswap/web3-react)
+
+You can get Görli ether [here](https://faucet.paradigm.xyz/) to interact whit the Dapp.
+
+## License
+>All contracts is under MIT license.
+
+## Author
+Made with 💙 by [@bjvalmaseda](https://twitter.com/bjvalmaseda)
