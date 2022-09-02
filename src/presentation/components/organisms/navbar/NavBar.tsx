@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Radio, RadioGroup, Stack, Button } from "@chakra-ui/react";
+import { Radio, RadioGroup, Stack, Button, Divider } from "@chakra-ui/react";
 import { mainStore } from "../../../../data/stores/main_store";
 import { VotingService } from "../../../../domain/services/voting_service";
 
 function NavBar() {
-  const [library, setLibraryId] = useState("1");
-
-  useEffect(() => {
-    changeGateway(library);
-  }, [library]);
-
   const {
     isWalletConnected,
     connectedWallet,
@@ -19,6 +13,12 @@ function NavBar() {
     changeGateway,
     libraries,
   } = mainStore();
+
+  const [library, setLibraryId] = useState(selectedLibrary.id);
+
+  useEffect(() => {
+    changeGateway(library);
+  }, [library]);
 
   async function connectWallet() {
     const voting_service = new VotingService(selectedLibrary.gateway);
@@ -34,7 +34,7 @@ function NavBar() {
   ));
 
   return (
-    <section className="g-0 m-0 row col-12 mt-3">
+    <section className="g-0 m-0 row col-12 mt-3 ">
       <div className="col col-6 text-start px-5">
         <h2 className="my-2">Select your preferred Library</h2>
         <RadioGroup onChange={setLibraryId} value={library}>
@@ -53,6 +53,7 @@ function NavBar() {
           </Button>
         )}
       </div>
+      <Divider className="mt-3" />
     </section>
   );
 }

@@ -6,6 +6,7 @@ import { Button, Input } from "@chakra-ui/react";
 import { mainStore } from "../data/stores/main_store";
 import { VotingService } from "../domain/services/voting_service";
 import { Card } from "./components/organisms/card/Card";
+import { CheckVote } from "./components/organisms/check_vote/CheckVote";
 
 function App() {
   const { selectedLibrary, isWalletConnected } = mainStore();
@@ -24,16 +25,6 @@ function App() {
     };
     getVotes();
   }, [isWalletConnected]);
-
-  const [checkAddress, setCheckAddress] = useState("");
-
-  const handleAddressChange = (event) => {
-    setCheckAddress(event.target.value);
-  };
-
-  async function checkAddressVote() {
-    await service.getVote(checkAddress);
-  }
 
   return (
     <div className="container-fluid normalize ">
@@ -54,23 +45,7 @@ function App() {
           ></Card>
         </section>
         <section className="normalize row col-12 justify-content-center mt-5 text-center">
-          <div className="col col-5 mx-auto">
-            <h2 className="text-center my-4">Check address vote</h2>
-            <Input
-              className="text-center"
-              placeholder="Enter address"
-              onChange={handleAddressChange}
-              value={checkAddress}
-            />
-            <Button
-              className="my-4"
-              colorScheme="green"
-              isDisabled={!isWalletConnected}
-              onClick={() => checkAddressVote()}
-            >
-              Check Address Vote
-            </Button>
-          </div>
+          <CheckVote></CheckVote>
         </section>
       </div>
     </div>

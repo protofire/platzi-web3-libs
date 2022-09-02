@@ -1,37 +1,67 @@
 import { ConnectorProvider } from "../../../domain/repositories/connector_provider";
 import { VotingRepository } from "../../../domain/repositories/voting_repositorie";
+import Web3 from "web3";
+import { AbiItem } from "web3-utils";
+import contractABI from "../../../assets/contract_ABI.json";
 
 export class Web3Gateway implements VotingRepository {
-  connector_provider: ConnectorProvider;
+  private provider: Web3;
+  private contract_address = import.meta.env.VITE_CONTRACT_ADDRES;
 
   constructor(connector_provider: ConnectorProvider) {
-    this.connector_provider = connector_provider;
-  }
-  getVote(address: string): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
-  getNegativeVotes(): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
-  getPositiveVotes(): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
-  getAddress(): Promise<string> {
-    throw new Error("Method not implemented.");
+    const connector = connector_provider.getConnectorProvider();
+    this.provider = new Web3(connector);
   }
 
-  makeVote(): Promise<void> {
-    throw new Error("Method not implemented.");
+  private getUnsignedContract() {
+    const contract = new this.provider.eth.Contract(
+      contractABI as AbiItem[],
+      this.contract_address
+    );
+    return contract;
+  }
+
+  async getVote(address: string) {
+    console.log("# Using Web3Js Library");
+    const contract = this.getUnsignedContract();
+    const vote = await contract.methods.getVote(address).call();
+    return vote.toString();
+  }
+
+  async getNegativeVotes() {
+    console.log("# Using Web3Js Library");
+
+    const contract = this.getUnsignedContract();
+    const votes = await contract.methods.votesForNo().call();
+    return votes.toString();
+  }
+
+  async getPositiveVotes() {
+    console.log("# Using Web3Js Library");
+
+    const contract = this.getUnsignedContract();
+    const votes = await contract.methods.votesForYes().call();
+    return votes.toString();
+  }
+
+  async getAddress() {
+    console.log("# Using Web3Js Library");
+    const accounts = await this.provider.eth.getAccounts();
+    return accounts[0];
+  }
+
+  async makeVote(vote: string) {
+    console.log("# Using Web3Js Library");
+    const contract = this.getUnsignedContract();
+    const fee = await contract.methods.VOTE_FEE().call();
+    const address = await this.getAddress();
+    await contract.methods.vote(vote).call({
+      from: address,
+      value: fee,
+    });
   }
 
   async connectWallet() {
-    const connector = this.connector_provider.getConnectorProvider();
-    console.log('Libreria Web3')
-    // const provider = new ethers.providers.Web3Provider(connector);
-    // await provider.send("eth_requestAccounts", []);
-  }
-  
-  disconnectWallet(): Promise<void> {
-    throw new Error("Method not implemented.");
+    await this.provider.eth.requestAccounts();
   }
 }
