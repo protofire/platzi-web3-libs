@@ -1,6 +1,9 @@
 import React from "react";
 import "./ChallengeBanner.css";
 
+import protofire_img from "/src/assets/protofire.webp";
+import platzi_img from "/src/assets/platzi.webp";
+
 export function ChallengerBanner() {
   return (
     <div className="normalize row col-12 align-items-center">
@@ -38,13 +41,9 @@ export function ChallengerBanner() {
       </h2>
 
       <h2 className="challenge-subtitle mt-5">Powered By:</h2>
+      <img src={protofire_img} alt="protofire_logo" className="sponsor mx-2" />
       <img
-        src="../../../../assets/protofire.webp"
-        alt="protofire_logo"
-        className="sponsor mx-2"
-      />
-      <img
-        src="../../../../assets/platzi.webp"
+        src={platzi_img}
         alt="platzi_logo"
         className="sponsor mx-2"
         onClick={() => window.open("https://platzi.com/")}
