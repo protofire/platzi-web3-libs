@@ -6,6 +6,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { Providers, connector } from './config/web3'
 import { Home } from './views/Home'
+import { Header } from './components/Header'
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <header className="App-header">
         <Home />
         {
