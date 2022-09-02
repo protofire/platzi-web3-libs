@@ -7,12 +7,14 @@ import {
 	useColorModeValue,
 	Stack,
 	Heading,
-  Select
+	Select,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NavLink from './nav-link';
 import Footer from './footer';
 import WalletData from './wallet-data';
+import { useContext } from 'react';
+import { LibContext } from '../../App';
 
 const Links = [
 	{
@@ -22,12 +24,13 @@ const Links = [
 ];
 
 const MainLayout = ({ children }) => {
+	const { lib, setLib } = useContext(LibContext); 
 	const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleChange = (event) => {
-    event.preventDefault();
-    localStorage.setItem('choosedLib', event.target.value)
-  }
-  
+	const handleChange = (event) => {
+		event.preventDefault();
+		setLib(event.target.value);
+	};
+
 	return (
 		<Flex minH="100vh" direction="column">
 			<Box
@@ -75,10 +78,16 @@ const MainLayout = ({ children }) => {
 						</HStack>
 					</HStack>
 					<HStack>
-            <Select placeholder='Choose library' onChange={handleChange} color='orange' >
-              <option value='opt_web3' bg={'black'}>web3.js</option>
-              <option value='opt_ethers'>ethers.js</option>
-            </Select>
+						<Select
+							placeholder="Choose library"
+							onChange={handleChange}
+							color="orange"
+						>
+							<option value="opt_web3" bg={'black'}>
+								web3.js
+							</option>
+							<option value="opt_ethers">ethers.js</option>
+						</Select>
 						<WalletData />
 					</HStack>
 				</Flex>
