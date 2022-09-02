@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-
 import NavBar from "./components/organisms/navbar/NavBar";
 import { mainStore } from "../data/stores/main_store";
 import { VotingService } from "../domain/services/voting_service";
@@ -8,23 +6,25 @@ import { Card } from "./components/molecules/card/Card";
 import { CheckVote } from "./components/organisms/check_vote/CheckVote";
 import { Footer } from "./components/organisms/footer/Footer";
 import { ChallengerBanner } from "./components/organisms/challenger_banner/ChallengeBanner";
+import "./App.css";
+
 
 function App() {
-  const { selectedLibrary, isWalletConnected, alreadyVoted } = mainStore();
-
-  const service = new VotingService(selectedLibrary.gateway);
-
-  const [positiveVotes, setPositiveVotes] = useState("0");
-  const [negativeVotes, setNegative] = useState("0");
+  const {
+    selectedLibrary,
+    isWalletConnected,
+    alreadyVoted,
+    positiveVotes,
+    negativeVotes,
+    getVotes,
+  } = mainStore();
 
   useEffect(() => {
-    const getVotes = async () => {
-      const positiveVotes = await service.getPositiveVotes();
-      const negativeVotes = await service.getNegativeVotes();
-      setPositiveVotes(positiveVotes);
-      setNegative(negativeVotes);
+    const requestVotes = async () => {
+      const service = new VotingService(selectedLibrary.gateway);
+      await getVotes(service);
     };
-    getVotes();
+    requestVotes();
   }, [isWalletConnected]);
 
   return (
@@ -32,7 +32,7 @@ function App() {
       <div className="normalize row col-12 app-content">
         <NavBar></NavBar>
         <section className="normalize col col-12 col-lg-6 px-5 mt-4">
-        <ChallengerBanner></ChallengerBanner>
+          <ChallengerBanner></ChallengerBanner>
         </section>
         <section className="normalize col col-12 col-lg-6  mt-4">
           <div className="normalize row col-12 justify-content-center">

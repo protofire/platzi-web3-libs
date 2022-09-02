@@ -28,7 +28,6 @@ function NavBar() {
     const address = await voting_service.getAddress();
     const alreadyVoted = await voting_service.getVote(address);
     connectedWallet(address);
-    console.log(alreadyVoted);
     if (alreadyVoted != "0") {
       setAlreadyVoted();
     }

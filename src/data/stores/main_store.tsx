@@ -1,5 +1,6 @@
 import create from "zustand";
 import { VotingRepository } from "../../domain/repositories/voting_repositorie";
+import { VotingService } from "../../domain/services/voting_service";
 import { MetamaskProvider } from "../connector_providers/metamask_provider";
 import { EthersjsGateway } from "../repositories_impl/voting_repositories/etherjs_impl";
 import { Web3Gateway } from "../repositories_impl/voting_repositories/web3_impl";
@@ -9,6 +10,8 @@ interface AppState {
   addressConnected: string;
   alreadyVoted: boolean;
   selectedLibrary: { id: string; name: string; gateway: VotingRepository };
+  positiveVotes: string;
+  negativeVotes: string;
   libraries: {
     id: string;
     name: string;
@@ -18,6 +21,7 @@ interface AppState {
   disconnectedWallet: () => void;
   changeGateway: (id: string) => void;
   setAlreadyVoted: () => void;
+  getVotes: (service: VotingService) => Promise<void>;
 }
 
 const connector_provider = new MetamaskProvider();
@@ -29,6 +33,8 @@ export const mainStore = create<AppState>((set) => ({
   isWalletConnected: false,
   addressConnected: "",
   alreadyVoted: false,
+  positiveVotes: "0",
+  negativeVotes: "0",
   selectedLibrary: { id: "1", name: "EthersJs", gateway: ethersGateway },
   libraries: [
     { id: "1", name: "EthersJs", gateway: ethersGateway },
@@ -58,6 +64,14 @@ export const mainStore = create<AppState>((set) => ({
   setAlreadyVoted: () => {
     set((state) => ({
       alreadyVoted: true,
+    }));
+  },
+  getVotes: async (service: VotingService) => {
+    const positiveVotes = await service.getPositiveVotes();
+    const negativeVotes = await service.getNegativeVotes();
+    set((state) => ({
+      positiveVotes: positiveVotes,
+      negativeVotes: negativeVotes,
     }));
   },
 }));

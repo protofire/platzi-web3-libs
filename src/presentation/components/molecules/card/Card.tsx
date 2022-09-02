@@ -10,14 +10,15 @@ export function Card(props: {
   name: string;
   buttonName: string;
 }) {
-  const { selectedLibrary, isWalletConnected, alreadyVoted } = mainStore();
+  const { selectedLibrary, isWalletConnected, alreadyVoted, getVotes } =
+    mainStore();
   const toast = useToast();
 
-  const service = new VotingService(selectedLibrary.gateway);
-
   async function makeVote(vote: string) {
+    const service = new VotingService(selectedLibrary.gateway);
     try {
       await service.makeVote(vote);
+      await getVotes(service);
     } catch (error) {
       toast({
         title: "Error",
