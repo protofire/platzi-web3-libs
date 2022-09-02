@@ -1,8 +1,9 @@
 import React from "react";
 import "./ChallengeBanner.css";
 
-import protofire_img from "/src/assets/protofire.webp";
-import platzi_img from "/src/assets/platzi.webp";
+const protofire_img = new URL('../../../../assets/protofire.webp', import.meta.url).href
+const platzi_img = new URL('../../../../assets/platzi.webp', import.meta.url).href
+
 
 export function ChallengerBanner() {
   return (
