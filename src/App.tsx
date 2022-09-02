@@ -5,7 +5,7 @@ import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { Providers, connector } from './config/web3'
-import {Home} from './views/Home'
+import { Home } from './views/Home'
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -16,19 +16,26 @@ const connectorsByName: { [key: string]: AbstractConnector } = {
 }
 
 function App() {
+  const [ selectedLibrary, setSelectedLibrary ] = useState('web3')
   const [ balance, setBalance ] = useState(0)
   const { active, error, activate, deactivate, account, library} = useWeb3React<Providers>()
+
   const connect = useCallback(()  => {
     localStorage.setItem('previouslyConnected', 'true')
     activate(connector)
   }, [activate])
 
   const getBalance = useCallback(async () => {
-    const web3 = library?.web3Library
-    const balanceFromAccount = await web3?.eth.getBalance(account!!);
-    const balanceJS : Number = (Number(balanceFromAccount) / 1e18)
-    setBalance(Number(balanceJS.toFixed(2)))
-  }, [library?.ethersLibrary, account])
+    let balance : number;
+    let web3;
+    if (selectedLibrary === 'web3') {
+      web3 = library?.web3Library.eth
+    } else {
+      web3 = library?.ethersLibrary
+    }
+    balance = Number((Number(await web3?.getBalance(account!!)) / 1e18).toFixed(2));
+    setBalance(balance)
+  }, [ library?.ethersLibrary, account ])
 
 
   const disconnect = () => {
