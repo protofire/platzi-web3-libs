@@ -29,7 +29,12 @@ export function ChallengerBanner() {
       </h2>
       <h2 className="challenge-subtitle mt-3 icon-button">
         You can check the repo here:{" "}
-        <i className="fa-brands fa-github"></i>
+        <i
+          onClick={() =>
+            window.open("https://github.com/reyesmfabian/platzi-web3-libs")
+          }
+          className="fa-brands fa-github"
+        ></i>
       </h2>
 
       <h2 className="challenge-subtitle mt-5">Powered By:</h2>
