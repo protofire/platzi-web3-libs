@@ -15,7 +15,7 @@ The app consist only of a frontend. It work in Görli and with MetaMask.
 
 The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
 
-You can find a demo deployed in [https://web3challenge.bjvalmaseda.xyz] 
+You can find a demo deployed in [https://web3challenge.bjvalmaseda.xyz](https://web3challenge.bjvalmaseda.xyz)
 
 !['Dapp Screenshot'](docs/Screenshot%20from%202022-09-01%2019-47-38.png)
 
