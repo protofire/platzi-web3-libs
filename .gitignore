@@ -5,5 +5,5 @@ node_modules
 .next
 
 #yarn
-yarn.error
+yarn-error.log
 yarn.lock
