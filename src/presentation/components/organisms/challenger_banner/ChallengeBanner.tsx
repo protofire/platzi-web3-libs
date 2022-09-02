@@ -39,12 +39,12 @@ export function ChallengerBanner() {
 
       <h2 className="challenge-subtitle mt-5">Powered By:</h2>
       <img
-        src="/src/assets/protofire.webp"
+        src="../../../../assets/protofire.webp"
         alt="protofire_logo"
         className="sponsor mx-2"
       />
       <img
-        src="/src/assets/platzi.webp"
+        src="../../../../assets/platzi.webp"
         alt="platzi_logo"
         className="sponsor mx-2"
         onClick={() => window.open("https://platzi.com/")}
