@@ -36,7 +36,7 @@ You can find a demo deployed in [https://web3challenge.bjvalmaseda.xyz](https://
 You can get Görli ether [here](https://faucet.paradigm.xyz/) to interact whit the Dapp.
 
 ## License
->All contracts is under MIT license.
+>This Dapp is under MIT license.
 
 ## Author
 Made with 💙 by [@bjvalmaseda](https://twitter.com/bjvalmaseda)
