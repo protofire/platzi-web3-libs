@@ -7,6 +7,7 @@ import { Web3Gateway } from "../repositories_impl/voting_repositories/web3_impl"
 interface AppState {
   isWalletConnected: boolean;
   addressConnected: string;
+  alreadyVoted: boolean;
   selectedLibrary: { id: string; name: string; gateway: VotingRepository };
   libraries: {
     id: string;
@@ -16,6 +17,7 @@ interface AppState {
   connectedWallet: (address: string) => void;
   disconnectedWallet: () => void;
   changeGateway: (id: string) => void;
+  setAlreadyVoted: () => void;
 }
 
 const connector_provider = new MetamaskProvider();
@@ -26,11 +28,11 @@ const web3Gateway = new Web3Gateway(connector_provider);
 export const mainStore = create<AppState>((set) => ({
   isWalletConnected: false,
   addressConnected: "",
-  selectedLibrary:  { id: "2", name: "Web3", gateway: web3Gateway },
+  alreadyVoted: false,
+  selectedLibrary: { id: "1", name: "EthersJs", gateway: ethersGateway },
   libraries: [
     { id: "1", name: "EthersJs", gateway: ethersGateway },
     { id: "2", name: "Web3", gateway: web3Gateway },
-
   ],
 
   connectedWallet: (address: string) => {
@@ -44,12 +46,18 @@ export const mainStore = create<AppState>((set) => ({
     set((state) => ({
       isWalletConnected: false,
       addressConnected: "",
+      alreadyVoted: false,
     }));
   },
 
   changeGateway: (id: string) => {
     set((state) => ({
       selectedLibrary: state.libraries.find((library) => library.id == id),
+    }));
+  },
+  setAlreadyVoted: () => {
+    set((state) => ({
+      alreadyVoted: true,
     }));
   },
 }));

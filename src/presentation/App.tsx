@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import NavBar from "./components/organisms/navbar/NavBar";
-import { Button, Input } from "@chakra-ui/react";
 import { mainStore } from "../data/stores/main_store";
 import { VotingService } from "../domain/services/voting_service";
-import { Card } from "./components/organisms/card/Card";
+import { Card } from "./components/molecules/card/Card";
 import { CheckVote } from "./components/organisms/check_vote/CheckVote";
+import { Footer } from "./components/organisms/footer/Footer";
+import { ChallengerBanner } from "./components/organisms/challenger_banner/ChallengeBanner";
 
 function App() {
-  const { selectedLibrary, isWalletConnected } = mainStore();
+  const { selectedLibrary, isWalletConnected, alreadyVoted } = mainStore();
 
   const service = new VotingService(selectedLibrary.gateway);
 
@@ -27,27 +28,40 @@ function App() {
   }, [isWalletConnected]);
 
   return (
-    <div className="container-fluid normalize ">
-      <div className="normalize row col-12">
+    <div className="container-fluid normalize app-container">
+      <div className="normalize row col-12 app-content">
         <NavBar></NavBar>
-        <section className="normalize row col-12 justify-content-center mt-5">
-          <Card
-            votes={positiveVotes}
-            voteFor={"2"}
-            name="POSITIVE VOTES"
-            buttonName="Vote YES"
-          ></Card>
-          <Card
-            votes={negativeVotes}
-            voteFor={"1"}
-            name="NEGATIVE VOTES"
-            buttonName="Vote NO"
-          ></Card>
+        <section className="normalize col col-12 col-lg-6 px-5 mt-4">
+        <ChallengerBanner></ChallengerBanner>
         </section>
-        <section className="normalize row col-12 justify-content-center mt-5 text-center">
-          <CheckVote></CheckVote>
+        <section className="normalize col col-12 col-lg-6  mt-4">
+          <div className="normalize row col-12 justify-content-center">
+            <Card
+              votes={positiveVotes}
+              voteFor={"2"}
+              name="YES"
+              buttonName="Vote YES"
+            ></Card>
+            <Card
+              votes={negativeVotes}
+              voteFor={"1"}
+              name="NO"
+              buttonName="Vote NO"
+            ></Card>
+            <div className="col col-12">
+              {alreadyVoted ? (
+                <h2 className="text-center fw-bold mt-5">
+                  Congratulations! You have already voted for this cause
+                </h2>
+              ) : null}
+            </div>
+          </div>
+          <div className="normalize row col-12 justify-content-center mt-3 mb-5 text-center">
+            <CheckVote></CheckVote>
+          </div>
         </section>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

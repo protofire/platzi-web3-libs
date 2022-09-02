@@ -1,0 +1,16 @@
+.app-navbar {
+  height: 10vh;
+}
+
+.app-button {
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.app-button:hover {
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+  transform: scale(1.03);
+}

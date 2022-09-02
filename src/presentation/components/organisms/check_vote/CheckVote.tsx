@@ -16,14 +16,15 @@ import { mainStore } from "../../../../data/stores/main_store";
 import { VotingService } from "../../../../domain/services/voting_service";
 
 export function CheckVote() {
-  const { selectedLibrary, isWalletConnected } = mainStore();
+  const { selectedLibrary } = mainStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
   const service = new VotingService(selectedLibrary.gateway);
   const [checkAddress, setCheckAddress] = useState("");
-  const [checkResult, setCheckResult] = useState("");
-
+  const [checkResult, setCheckResult] = useState(
+    "This address has no registered vote"
+  );
   const handleAddressChange = (event) => {
     setCheckAddress(event.target.value);
   };
@@ -34,7 +35,16 @@ export function CheckVote() {
         throw { message: "Please enter the address" };
       }
       const result = await service.getVote(checkAddress);
-      setCheckResult(result);
+      switch (result) {
+        case "1":
+          setCheckResult("This address vote NO");
+          break;
+        case "2":
+          setCheckResult("This address vote YES");
+          break;
+        default:
+          break;
+      }
       onOpen();
     } catch (error) {
       toast({
@@ -46,9 +56,6 @@ export function CheckVote() {
       });
     }
   }
-
-  const positiveMessage = "This address vote YES";
-  const negativeMessage = "This address vote NO";
 
   return (
     <div className="col col-5 mx-auto">
@@ -64,7 +71,7 @@ export function CheckVote() {
         colorScheme="green"
         onClick={() => checkAddressVote()}
       >
-        Check Address Vote
+        Check Vote
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -74,7 +81,7 @@ export function CheckVote() {
           <ModalCloseButton />
           <ModalBody>
             <h2 className="text-center fw-bold">
-              {checkResult == "1" ? negativeMessage : positiveMessage}
+              {checkResult}
             </h2>
           </ModalBody>
           <ModalFooter>

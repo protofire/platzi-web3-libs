@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Radio, RadioGroup, Stack, Button, Divider } from "@chakra-ui/react";
 import { mainStore } from "../../../../data/stores/main_store";
 import { VotingService } from "../../../../domain/services/voting_service";
+import "./NavBar.css"
 
 function NavBar() {
   const {
@@ -12,6 +13,7 @@ function NavBar() {
     selectedLibrary,
     changeGateway,
     libraries,
+    setAlreadyVoted,
   } = mainStore();
 
   const [library, setLibraryId] = useState(selectedLibrary.id);
@@ -24,7 +26,12 @@ function NavBar() {
     const voting_service = new VotingService(selectedLibrary.gateway);
     await voting_service.connectWallet();
     const address = await voting_service.getAddress();
+    const alreadyVoted = await voting_service.getVote(address);
     connectedWallet(address);
+    console.log(alreadyVoted);
+    if (alreadyVoted != "0") {
+      setAlreadyVoted();
+    }
   }
 
   const availableLibraries = libraries.map((library) => (
@@ -34,27 +41,29 @@ function NavBar() {
   ));
 
   return (
-    <section className="g-0 m-0 row col-12 mt-3 ">
-      <div className="col col-6 text-start px-5">
+    <div className="col col-12 mt-3 app-navbar">
+    <section className="g-0 m-0 row col-12">
+      <div className="col col-6 text-start px-5 my-auto">
         <h2 className="my-2">Select your preferred Library</h2>
         <RadioGroup onChange={setLibraryId} value={library}>
           <Stack direction="row">{availableLibraries}</Stack>
         </RadioGroup>
       </div>
-      <div className="col col-6 text-end px-5">
+      <div className="col col-6 text-end px-5 my-auto">
         {isWalletConnected ? (
-          <Button colorScheme="red" onClick={disconnectedWallet}>
+          <Button className="app-button" colorScheme="red" onClick={disconnectedWallet}>
             Disconnect Wallet <br />
             {addressConnected}
           </Button>
         ) : (
-          <Button colorScheme="blue" onClick={connectWallet}>
+          <Button className="app-button" colorScheme="blue" onClick={connectWallet}>
             Connect Wallet
           </Button>
         )}
       </div>
-      <Divider className="mt-3" />
+      {/* <Divider className="mt-3" /> */}
     </section>
+    </div>
   );
 }
 
