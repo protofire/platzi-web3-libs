@@ -34,7 +34,10 @@ export const VoteButton = (
   },[alreadyVotedCallback])
 
   const voteNow = async () => {
-    if (alreadyVoted === 0 && !voting && active && account && selectedLibrary) {
+    if (
+      //alreadyVoted === 0 &&  temporal disabled
+      !voting && active && account && selectedLibrary
+    ) {
       setVoting(true)
       try {
         const result : VoteResponse = await selectedLibrary.sendVote(account, value)
