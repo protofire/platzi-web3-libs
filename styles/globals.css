@@ -24,16 +24,22 @@ body,
   height: 100%;
 }
 
-.text-gradient {
+.text-gradient-hover {
   color: var(--secondary);
   filter: opacity(0.95);
 }
 
-.text-gradient:not(:hover) {
+.text-gradient-hover:not(:hover) {
   background: -webkit-linear-gradient(0deg, var(--secondary), var(--secondaryLighter));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: opacity(1);
+}
+
+.text-gradient{
+  background: -webkit-linear-gradient(0deg, var(--secondary), var(--secondaryLighter));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .switcher > div:nth-child(1) {

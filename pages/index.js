@@ -24,7 +24,7 @@ const Home = () => {
         <div className="flex items-center relative">
           <a
             href="mailto: gonza.otc@gmail.com"
-            className="text-gradient text-2xl font-semibold mr-2"
+            className="text-gradient-hover text-2xl font-semibold mr-2"
           >
             CONTACT ME
           </a>

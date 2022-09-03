@@ -177,6 +177,12 @@ const Proposals = () => {
                   YOU HAVE VOTED FOR {proposal.userVote == 1 ? "NO" : "YES"}
                 </p>
               </button>
+            ) : wallet.balance < 0.0101 ? (
+              <button className="btn--proto--opacity !w-full" disabled={true}>
+                <p className="text-gradient text-lg font-semibold">
+                  YOU DON'T HAVE ENOUGH FUNDS
+                </p>
+              </button>
             ) : (
               <>
                 <button
@@ -185,7 +191,7 @@ const Proposals = () => {
                     handleVote(2);
                   }}
                 >
-                  <p className="text-gradient text-lg font-semibold">VOTE YES</p>
+                  <p className="text-gradient-hover text-lg font-semibold">VOTE YES</p>
                 </button>
                 <button
                   className="btn--proto--opacity !w-full"
@@ -193,7 +199,7 @@ const Proposals = () => {
                     handleVote(1);
                   }}
                 >
-                  <p className="text-gradient text-lg font-semibold">VOTE NO</p>
+                  <p className="text-gradient-hover text-lg font-semibold">VOTE NO</p>
                 </button>
               </>
             )
