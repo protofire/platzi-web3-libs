@@ -23,12 +23,6 @@ export const Wallet = () => {
   }, [activate])
 
 
-
-  useEffect(() => {
-    if (localStorage.getItem('previouslyConnected') === 'true') {
-      connect()
-    }
-  }, [connect])
   const disconnect = () => {
     if (deactivate) {
       deactivate()
@@ -44,6 +38,12 @@ export const Wallet = () => {
   }, [ selectedLibrary, account ])
 
   const isUnsupportedChain = error instanceof UnsupportedChainIdError 
+
+  useEffect(() => {
+    if (localStorage.getItem('previouslyConnected') === 'true') {
+      connect()
+    }
+  }, [connect])
 
   useEffect(() => {
     if (active) {
