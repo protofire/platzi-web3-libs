@@ -13,7 +13,6 @@ const ConnectWallet = () => {
     if (library == "ethers") {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       return +(+ethers.utils.formatEther(await provider.getBalance(address))).toFixed(4);
-    
     } else if (library == "web3") {
       const web3 = new Web3(window.ethereum);
       return +(+Web3.utils.fromWei(await web3.eth.getBalance(address))).toFixed(4);
@@ -119,12 +118,14 @@ const ConnectWallet = () => {
 
   return (
     <>
-      {!chain.supported ? (
+      {loadingWallet ? (
+        <button className="btn--proto--opacity" disabled={true}>
+          loading...
+        </button>
+      ) : !chain.supported ? (
         <button className="btn--proto--opacity !text-white/50 !text-lg" onClick={switchChain}>
           UNSUPPORTED CHAIN
         </button>
-      ) : loadingWallet ? (
-        <button className="btn--proto">loading...</button>
       ) : wallet?.connected ? (
         <button
           className="btn--proto"
