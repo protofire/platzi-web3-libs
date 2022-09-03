@@ -6,7 +6,7 @@ import Web3 from "web3";
 import { WalletContext } from "../context/context";
 import { contract } from "../pages/_app";
 
-const proposalName = "EIP-2236690448";
+const proposalName = "EIP-4337";
 
 // @dev Web3.js doesn't able me to desectructure inside web3.eth.Contract()
 const [contractAddress, abi] = contract;
