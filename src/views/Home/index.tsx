@@ -5,7 +5,7 @@ import { Switch } from "../../components/Switch"
 
 
 export const Home = ({switchLibrary, setSwitchLibrary} : any) => {
-  const { selectedLibrary } = useContext(LibraryContext)
+  const { active, selectedLibrary } = useContext(LibraryContext)
 
   return (
     <div>
@@ -20,7 +20,7 @@ export const Home = ({switchLibrary, setSwitchLibrary} : any) => {
 
       <Switch switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
 
-      <Dashboard selectedLibrary={selectedLibrary} />
+      <Dashboard active={active} selectedLibrary={selectedLibrary} />
     </div>
   )
 }

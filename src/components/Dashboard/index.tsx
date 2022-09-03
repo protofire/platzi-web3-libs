@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import {VoteButton} from '../VoteButton'
 import { MdCheck, MdClose } from 'react-icons/md'
 
-export const Dashboard = ({selectedLibrary} : any) => {
+export const Dashboard = ({active, selectedLibrary} : any) => {
 
   const [voteNo, setVoteNo] = useState(0)
   const [voteYes, setVoteYes] = useState(0)
@@ -27,16 +27,13 @@ export const Dashboard = ({selectedLibrary} : any) => {
   return (
     <div className="my-8">
       <div className="flex justify-center flex-wrap">
-        {voting ? 
+        {
+          !active ? 
+          ''
+          :
+          voting ? 
 
           <>
-          <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 flex-inline no-wrap">
-            Click into the 
-              <span> <MdClose className="inline text-red-400" /> </span>
-            or 
-              <span> <MdCheck className="inline text-lime-400"/> </span>
-            to vote
-          </p>
           <div className="flex no-wrap items-center">
               <svg aria-hidden="true" className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -49,10 +46,21 @@ export const Dashboard = ({selectedLibrary} : any) => {
             alreadyVoted ?
               <p className="text-md">Thanks for voting</p>
           :
-          <>
-            <VoteButton value={1} currentlyVotes={voteNo} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
-            <VoteButton value={2} currentlyVotes={voteYes} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
-          </>
+          <div>
+            <div className="mb-8">
+              <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 flex-inline no-wrap">
+                Click into the 
+                  <span> <MdClose className="inline text-red-400" /> </span>
+                or 
+                  <span> <MdCheck className="inline text-lime-400"/> </span>
+                to vote
+              </p>
+            </div>
+            <div className="flex no-wrap items-center">
+              <VoteButton value={1} currentlyVotes={voteNo} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
+              <VoteButton value={2} currentlyVotes={voteYes} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
+            </div>
+          </div>
         }
        </div>
 
