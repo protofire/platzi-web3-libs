@@ -36,8 +36,12 @@ export const VoteButton = (
   const voteNow = async () => {
     if (alreadyVoted === 0 && !voting && active && account && selectedLibrary) {
       setVoting(true)
-      const result : VoteResponse = await selectedLibrary.sendVote(account, value)
-      console.log(result)
+      try {
+        const result : VoteResponse = await selectedLibrary.sendVote(account, value)
+        console.log(result)
+      } catch (error) {
+        console.log(error)
+      }
       setVoting(false)
     }
   }
@@ -45,13 +49,13 @@ export const VoteButton = (
   return (
     <>
       <div
+        onClick={() => {voteNow()}}
         className={
-          `flex items-center justify-center hover:scale-125 p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
+          `flex items-center justify-center p-4 mb-2 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
       }>
         <div
-          onClick={() => {voteNow()}}
           className={
-            `inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg 
+            `inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg shadow-md shadow-blue-700/80 ring-1 ring-blue-500 xl:hover:scale-125 
               ${
                 value === 1 ?
                   "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200"
