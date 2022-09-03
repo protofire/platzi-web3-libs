@@ -46,7 +46,7 @@ export const Dashboard = ({selectedLibrary} : any) => {
             </span>
           </div>
         </div>
-        <div className="overflow-hidden h-2.5 text-xs flex rounded my-2 bg-gray-800 dark:bg-gray-600">
+        <div className="overflow-hidden h-2.5 text-xs flex rounded my-2 bg-gray-800 dark:bg-gray-600 animate-shadow-effect">
           <div style={{"width":`${voteNo/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
           <div style={{"width":`${voteYes/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lime-500"></div>
         </div>
