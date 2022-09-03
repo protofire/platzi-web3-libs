@@ -16,12 +16,10 @@ export const Wallet = () => {
   const { active, error, activate, deactivate, account, selectedLibrary, setSelectedLibrary, chainId } =  useContext(LibraryContext)
   const [ balance, setBalance ] = useState(0)
 
-
   const connect = useCallback(()  => {
     localStorage.setItem('previouslyConnected', 'true')
     activate(connector)
   }, [activate])
-
 
   const disconnect = () => {
     if (deactivate) {
