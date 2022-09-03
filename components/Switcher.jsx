@@ -3,7 +3,7 @@ import Switch from "react-switch";
 import { WalletContext } from "../context/context";
 
 const Switcher = () => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const { library, setLibrary } = useContext(WalletContext);
 
   const handleChange = () => {

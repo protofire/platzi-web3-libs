@@ -6,7 +6,7 @@ export const WalletContext = createContext();
 export const ContextProvider = ({ children }) => {
   const [wallet, setWallet] = useState({ address: null, connected: false, balance: null });
   const [chain, setChain] = useState({name: null, id: null})
-  const [library, setLibrary] = useState("web3"); // ethers or web3
+  const [library, setLibrary] = useState("ethers"); // ethers or web3
 
   return (
     <WalletContext.Provider value={{ wallet, setWallet, library, setLibrary, chain, setChain }}>
