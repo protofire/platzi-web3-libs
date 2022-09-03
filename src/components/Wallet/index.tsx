@@ -4,6 +4,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { connector } from '../../config/web3'
 import { walletParse } from "../../hooks/helpers/walletParser"
+import { Button } from "./Button"
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -54,9 +55,12 @@ export const Wallet = () => {
     <div>
     {
       active && account ?
-        <div>
-          <p>{walletParse(account)} - {balance}</p>
-          <button onClick={disconnect}> Desconectar </button>
+        <div className="mr-5">
+          <p className="">
+            <span className="bg-slate-300 p-2 rounded-md">{walletParse(account)}</span>
+            <span className="bg-amber-300 p-2 ml-1 rounded-md">{balance} ETH</span>
+          </p>
+          <Button useStyle="disconnect" onClick={disconnect} text="Disconnect" />
         </div>
       : 
       isUnsupportedChain ? 
@@ -64,9 +68,7 @@ export const Wallet = () => {
         :
         Object.keys(connectorsByName).map((name) => {
           return (
-            <button key={name} onClick={connect}>
-             Connect
-            </button>
+            <Button useStyle="connect" onClick={connect} text="Connect" />
           )
         })
     }
