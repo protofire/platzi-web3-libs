@@ -1,0 +1,30 @@
+.button {
+  height: 28px;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--contrast2);
+  border-radius: 0.25rem;
+  inline-size: fit-content;
+  font-weight: 500;
+  will-change: transform, background;
+  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &__primary {
+    background: var(--primary);
+  }
+
+  &__secondary {
+    background: var(--secondary);
+  }
+
+  &__contrast1 {
+    background: var(--contrast1);
+    color: var(--contrast2);
+  }
+}

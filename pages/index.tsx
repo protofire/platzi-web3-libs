@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
+// Components
+import Navbar from '../src/components/Navbar'
+
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
@@ -13,10 +16,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.main__images}>
-          <Image src='/platzi.webp' width={50} height={50} />
-          <Image src='/favicon.ico' width={70} height={70} />
-        </div>
+        <Navbar />
         <h1 className="text-5xl font-bold underline">
           !Votaciones Platzi¡
         </h1>
