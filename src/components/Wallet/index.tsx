@@ -3,6 +3,7 @@ import { LibraryContext } from "../../App"
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { connector } from '../../config/web3'
+import { walletParse } from "../../hooks/helpers/walletParser"
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -52,9 +53,9 @@ export const Wallet = () => {
   return (
     <div>
     {
-      active ?
+      active && account ?
         <div>
-          <p>{account} - {balance}</p>
+          <p>{walletParse(account)} - {balance}</p>
           <button onClick={disconnect}> Desconectar </button>
         </div>
       : 
