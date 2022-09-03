@@ -1,7 +1,6 @@
-import { Web3Provider } from '@ethersproject/providers'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { useWeb3React } from '@web3-react/core'
-import Web3 from 'web3'
+import { Web3JS } from "../../hooks/domain/Web3JS"
+import { EthersJS } from "../../hooks/domain/EthersJS"
 
 export const GOERLI_NETWORK = 5
 
@@ -12,14 +11,13 @@ export const connector = new InjectedConnector({
 })
 
 export type Providers = {
-  ethersLibrary: Web3Provider,
-  web3Library: Web3
+  ethers: EthersJS ,
+  web3: Web3JS
 }
 
 export const getLibrary = (provider: any):  Providers => {
-  const ethersLibrary = new Web3Provider(provider)
-  const web3Library = new Web3(provider)
-  ethersLibrary.pollingInterval = 12000
-  return {ethersLibrary, web3Library}
+  const ethers = new EthersJS(provider, 12000)
+  const web3 = new Web3JS(provider)
+  return {ethers, web3}
 }
 
