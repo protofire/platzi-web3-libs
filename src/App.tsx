@@ -31,8 +31,10 @@ const connectorsByName: { [key: string]: AbstractConnector } = {
 const doSwitchLibrary = (isWeb3Library:any, setSelectedLibrary:any, library:any ) => {
     if (!isWeb3Library) {
       setSelectedLibrary(library.ethers)
+      localStorage.setItem('librarySelected', 'ethers')
     } else {
       setSelectedLibrary(library?.web3)
+      localStorage.setItem('librarySelected', 'web3')
     }
 }
 
@@ -50,11 +52,21 @@ export const LibraryContext = createContext<Library>({
 
 function App() {
   const { active, error, activate, deactivate, account, library, chainId } = useWeb3React<Providers>()
+
+  const libraryStorage = localStorage.getItem('librarySelected')
   const [ selectedLibrary, setSelectedLibrary ] = useState(library?.web3)
-  const [ switchLibrary, setSwitchLibrary ] = useState(true)
+  const [ switchLibrary, setSwitchLibrary ] = useState(!libraryStorage || libraryStorage === 'web3' ? true : false)
 
   useEffect(() => {
-    doSwitchLibrary(switchLibrary,setSelectedLibrary, library)
+    if (!libraryStorage) {
+       localStorage.setItem('librarySelected', 'web3')
+    }
+  }, [])
+
+  useEffect(() => {
+    if (library) {
+      doSwitchLibrary(switchLibrary,setSelectedLibrary, library)
+    }
   }, [switchLibrary, library, setSelectedLibrary])
 
   useMemo(
