@@ -46,7 +46,7 @@ export const VoteButton = (
     <>
       <div
         className={
-          `flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
+          `flex items-center justify-center hover:scale-125 p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
       }>
         <div
           onClick={() => {voteNow()}}
