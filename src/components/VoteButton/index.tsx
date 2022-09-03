@@ -5,18 +5,17 @@ import { VoteResponse } from "../../hooks/domain/Provider"
 
 
 export const VoteButton = (
-  { value, voting, setVoting, currentlyVotes } : { value: Number, currentlyVotes: Number, voting: any, setVoting: any }
+  { value, voting, setVoting, currentlyVotes, setAlreadyVoted } : { value: Number, currentlyVotes: Number, voting: any, setVoting: any, setAlreadyVoted: any }
 ) => {
   const { active, account, selectedLibrary } =  useContext(LibraryContext)
 
-  const [ alreadyVoted, setAlreadyVoted ] = useState(-1)
 
-  const votedStyles = () => {
-    if (value === alreadyVoted && (alreadyVoted === 1  || alreadyVoted === 2)) {
-      return "border-2 border-white"
-    }
-    return ""
-  }
+  //const votedStyles = () => {
+  //  if (value === alreadyVoted && (alreadyVoted === 1  || alreadyVoted === 2)) {
+  //    return "border-2 border-white"
+  //  }
+  //  return ""
+  //}
 
   const alreadyVotedCallback = useCallback(async () => {
     if(selectedLibrary?.contract) {
@@ -51,31 +50,35 @@ export const VoteButton = (
 
   return (
     <>
-      <div
-        onClick={() => {voteNow()}}
-        className={
-          `flex items-center justify-center p-4 mb-2 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
-      }>
-        <div
-          className={
-            `inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg shadow-md shadow-blue-700/80 ring-1 ring-blue-500 xl:hover:scale-125 
-              ${
-                value === 1 ?
-                  "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200"
-                  :
-                  "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200"
-              }
-          `}>
-        {
-          value === 1 ? 
-              <MdClose />
-          :
-              <MdCheck />
-        }
-        </div>
-        <div className="ml-3 text-sm font-normal">Votes for {value === 1 ? 'No' : 'Yes' }: </div>
-        <div className="ml-3 text-sm font-normal px-1 border-2 border-slate-200/10">{currentlyVotes.toString()}</div>
-      </div>
+          <div
+            onClick={() => {voteNow()}}
+            className={
+              `flex items-center justify-center p-4 mb-2 full max-w-xs text-gray-500 border-2 border-white rounded-lg shadow dark:text-gray-500 dark:border-gray-700/90 mx-10 group`
+          }> 
+            <div
+              className={
+                `shadow-md shadow-gray-800/80 dark:shadow-gray-400/50 inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg xl:group-hover:scale-110
+                  ${
+                    value === 1 ?
+                      "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200"
+                      :
+                      "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200"
+                  }
+              `}>
+
+                <div className="absolute h-2.5 w-2.5">
+                  <span className="absolute inline-flex top-4 left-4 rounded-full h-2.5 w-2.5 bg-sky-300"></span>
+                  <span className="animate-ping absolute top-4 left-4 inline-flex h-full w-full rounded-full bg-sky-300 opacity-75"></span>
+                </div>
+            {
+              value === 1 ? 
+                  <MdClose />
+              :
+                  <MdCheck />
+            }
+            </div>
+            <div className="ml-3 text-sm font-normal">Vote for {value === 1 ? 'No' : 'Yes' } </div>
+          </div>
     </>
   )
 }
