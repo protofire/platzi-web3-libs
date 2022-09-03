@@ -45,7 +45,7 @@ const Banner = () => {
           {images.map((image, index) => (
             <SwiperSlide key={index}>
               <img
-                className={`w-[6.2rem] h-[6.2rem] object-contain ${
+                className={`w-[5.4rem] h-[5.4rem] object-contain ${
                   index === 10 ? "rounded-full" : ""
                 }`}
                 src={image}
