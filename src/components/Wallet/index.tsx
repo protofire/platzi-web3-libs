@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext, useCallback } from "react"
 import { LibraryContext } from "../../App"
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
-import { Providers, connector } from '../../config/web3'
+import { UnsupportedChainIdError } from '@web3-react/core'
+import { connector } from '../../config/web3'
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -13,7 +13,7 @@ const connectorsByName: { [key: string]: AbstractConnector } = {
 }
 
 export const Wallet = () => {
-  const { active, error, activate, deactivate, account, selectedLibrary, setSelectedLibrary, chainId } =  useContext(LibraryContext)
+  const { active, error, activate, deactivate, account, selectedLibrary } =  useContext(LibraryContext)
   const [ balance, setBalance ] = useState(0)
 
   const connect = useCallback(()  => {
