@@ -25,16 +25,8 @@ export const Dashboard = ({selectedLibrary} : any) => {
   return (
     <>
       <div className="flex justify-center flex-wrap md:justify-between">
-        <div className="flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-          <VoteButton value={1} voting={voting} setVoting={setVoting} />
-          <div className="ml-3 text-sm font-normal">Votes for No: </div>
-          <div className="ml-3 text-sm font-normal px-1 border-2 border-slate-200/10">{voteNo}</div>
-        </div>
-        <div className="flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white hover:bg-gray-800 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-          <VoteButton value={2} voting={voting} setVoting={setVoting} />
-          <div className="ml-3 text-sm font-normal">Votes for yes:</div>
-          <div className="ml-3 mr-3 text-sm font-normal px-1 border-2 border-slate-200/10">{voteYes}</div>
-        </div>
+          <VoteButton value={1} currentlyVotes={voteNo} voting={voting} setVoting={setVoting} />
+          <VoteButton value={2} currentlyVotes={voteYes} voting={voting} setVoting={setVoting} />
       </div>
 
       <div>

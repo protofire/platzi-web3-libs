@@ -1,15 +1,42 @@
 import { MdCheck, MdClose } from 'react-icons/md'
-import { useContext } from 'react'
+import { useContext, useState, useCallback, useEffect } from 'react'
 import {LibraryContext} from '../../App'
 import { VoteResponse } from "../../hooks/domain/Provider"
 
+
 export const VoteButton = (
-  { value, voting, setVoting } : { value: Number, voting: any, setVoting: any }
+  { value, voting, setVoting, currentlyVotes } : { value: Number, currentlyVotes: Number, voting: any, setVoting: any }
 ) => {
   const { active, account, selectedLibrary } =  useContext(LibraryContext)
+
+  const [ alreadyVoted, setAlreadyVoted ] = useState(-1)
+
+  const votedStyles = () => {
+    console.log('value',value,'already', alreadyVoted)
+    if (value === alreadyVoted && (alreadyVoted === 1  || alreadyVoted === 2)) {
+      return "border-2 border-white"
+    }
+    return ""
+  }
+
+  const alreadyVotedCallback = useCallback(async () => {
+    if(selectedLibrary?.contract) {
+      try {
+        const voted = await selectedLibrary.getVoteAccount(account)
+        setAlreadyVoted(Number(voted))
+      } catch {
+        setAlreadyVoted(0)
+        console.log('no voted')
+      }
+    }
+  }, [ account, selectedLibrary ])
+
+  useEffect(() => {
+    alreadyVotedCallback()
+  },[alreadyVotedCallback])
+
   const voteNow = async () => {
-    console.log('Status', voting)
-    if (!voting && active && account && selectedLibrary) {
+    if (alreadyVoted === 0 && !voting && active && account && selectedLibrary) {
       setVoting(true)
       const result : VoteResponse = await selectedLibrary.sendVote(account, value)
       console.log(result)
@@ -19,6 +46,10 @@ export const VoteButton = (
 
   return (
     <>
+      <div
+        className={
+          `flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
+      }>
       <div
         onClick={() => {voteNow()}}
         className={
@@ -36,6 +67,9 @@ export const VoteButton = (
         :
             <MdCheck />
       }
+      </div>
+        <div className="ml-3 text-sm font-normal">Votes for {value === 1 ? 'No' : 'Yes' }: </div>
+        <div className="ml-3 text-sm font-normal px-1 border-2 border-slate-200/10">{currentlyVotes.toString()}</div>
       </div>
     </>
   )
