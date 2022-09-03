@@ -10,13 +10,6 @@ export const VoteButton = (
   const { active, account, selectedLibrary } =  useContext(LibraryContext)
 
 
-  //const votedStyles = () => {
-  //  if (value === alreadyVoted && (alreadyVoted === 1  || alreadyVoted === 2)) {
-  //    return "border-2 border-white"
-  //  }
-  //  return ""
-  //}
-
   const alreadyVotedCallback = useCallback(async () => {
     if(selectedLibrary?.contract) {
       try {
@@ -34,7 +27,7 @@ export const VoteButton = (
 
   const voteNow = async () => {
     if (
-      //alreadyVoted === 0 &&  temporal disabled
+      //alreadyVoted === 0 &&  TODO temporal disabled
       !voting && active && account && selectedLibrary
     ) {
       setVoting(true)
