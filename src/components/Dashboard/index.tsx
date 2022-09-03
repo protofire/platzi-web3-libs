@@ -32,7 +32,7 @@ export const Dashboard = ({selectedLibrary} : any) => {
       <div className="my-5">
         <div className="flex mb-2 items-center justify-between">
           <div>
-            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lime-600 bg-red-200">
+            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-700/70 bg-red-200">
               No
               {` ${ totalVotes === 0 ? 0 : (voteNo/totalVotes*100).toFixed(2) }%`}
             </span>
