@@ -30,6 +30,8 @@ export class Web3JS implements Provider<Web3> {
     const votesForNo: Number = Number(await this.contract?.methods.votesForNo().call())
     const votesForYes: Number = Number(await this.contract?.methods.votesForYes().call())
     console.log('Votes in web3js',votesForYes, votesForNo)
-    return {voteForYes:votesForNo, voteForNo: votesForYes}
+    return {
+      voteForYes: votesForYes,
+      voteForNo: votesForNo}
   }
 }

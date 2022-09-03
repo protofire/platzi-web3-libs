@@ -1,6 +1,5 @@
 import { FC, useState, useCallback, useEffect, useContext } from 'react'
 import { LibraryContext } from "../../App"
-import { useProposalContract } from '../../hooks/useProposalContract'
 
 
 export const Home: FC = () => {
@@ -10,19 +9,18 @@ export const Home: FC = () => {
 
   const getVotes = useCallback(async () => {
     if(selectedLibrary.contract) {
+    }
       const votes = await selectedLibrary.getVotes()
       console.log('Votos response', votes)
       setVoteNo(votes.votesForNo)
       setVoteYes(votes.votesForYes)
-    }
 
   }, [selectedLibrary])
 
   useEffect(() => {
     getVotes()
-  },[getVotes, voteNo, voteYes])
+  },[getVotes])
 
-  console.log('Ahora vote no',voteNo)
   return (
     <div>
       <p>
