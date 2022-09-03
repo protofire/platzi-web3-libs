@@ -1,9 +1,7 @@
-import { Web3Provider } from '@ethersproject/providers'
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import {Contract} from 'web3-eth-contract';
-import { Provider, Votes } from './Provider'
-// T = Web3 | Web3Provider
+import { Provider, Votes, VoteType, VoteResponse, GAS_PRICE_LIMIT } from './Provider'
 
 export class Web3JS implements Provider<Web3> {
   library: Web3
@@ -35,4 +33,33 @@ export class Web3JS implements Provider<Web3> {
       voteForNo: votesForNo
     }
   }
+
+  async sendVote(account: string, vote: VoteType) : Promise<VoteResponse> {
+    const voteFee : Number = await this.getVoteFee()
+    return await this.contract?.methods.vote(BigInt(vote)).send({
+      from: account,
+      gas: GAS_PRICE_LIMIT,
+      value: voteFee // 0.01 ETH
+    }).on('receipt', () => {
+      return {
+        message: "sended",
+        result: true
+      };
+    }).on('error', (e: any) => {
+      console.log(e)
+      return {
+        message: "error",
+        result: false 
+      };
+    })
+  }
+
+  async getVoteFee() : Promise<Number> {
+    return await this.contract?.methods.VOTE_FEE().call()
+  }
+
+  async getVoteAccount(account : string) : Promise<VoteType> {
+    return await this.contract?.methods.getVote(account).call()
+  }
+
 }

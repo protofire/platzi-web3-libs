@@ -1,11 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
-import { MdCheck, MdClose } from 'react-icons/md'
+import {VoteButton} from '../VoteButton'
 
 export const Dashboard = ({selectedLibrary} : any) => {
 
   const [voteNo, setVoteNo] = useState(0)
   const [voteYes, setVoteYes] = useState(0)
   const [totalVotes, setTotalVotes] = useState(0)
+  const [ voting , setVoting ] = useState(false) 
 
   const getVotes = useCallback(async () => {
     if(selectedLibrary?.contract) {
@@ -25,16 +26,12 @@ export const Dashboard = ({selectedLibrary} : any) => {
     <>
       <div className="flex justify-center flex-wrap md:justify-between">
         <div className="flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-          <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
-            <MdClose />
-          </div>
+          <VoteButton value={1} voting={voting} setVoting={setVoting} />
           <div className="ml-3 text-sm font-normal">Votes for No: </div>
           <div className="ml-3 text-sm font-normal px-1 border-2 border-slate-200/10">{voteNo}</div>
         </div>
         <div className="flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white hover:bg-gray-800 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-          <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-            <MdCheck />
-          </div>
+          <VoteButton value={2} voting={voting} setVoting={setVoting} />
           <div className="ml-3 text-sm font-normal">Votes for yes:</div>
           <div className="ml-3 mr-3 text-sm font-normal px-1 border-2 border-slate-200/10">{voteYes}</div>
         </div>
