@@ -32,6 +32,7 @@ export class Web3JS implements Provider<Web3> {
     console.log('Votes in web3js',votesForYes, votesForNo)
     return {
       voteForYes: votesForYes,
-      voteForNo: votesForNo}
+      voteForNo: votesForNo
+    }
   }
 }

@@ -92,7 +92,6 @@ function App() {
   useMemo(
     () => {
       if (active && selectedLibrary && chainId && PROPOSAL_CONTRACT_ADDRESS_GOERLI) {
-        console.log('mmm')
         return selectedLibrary.contractInstance(ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI!!)
       }
     },

@@ -11,10 +11,9 @@ export const Home = () => {
     if(selectedLibrary?.contract) {
       const votes = await selectedLibrary.getVotes()
       console.log('Votos response', votes)
-      setVoteNo(votes.votesForNo)
-      setVoteYes(votes.votesForYes)
+      setVoteNo(votes.voteForNo)
+      setVoteYes(votes.voteForYes)
     }
-
   }, [selectedLibrary])
 
   useEffect(() => {
@@ -24,10 +23,10 @@ export const Home = () => {
   return (
     <div>
       <p>
-        Votos NO: {voteNo > 0 ? voteNo : '-'}
+        Votos NO: {voteNo}
       </p>
       <p>
-        Votos YES: {voteYes > 0 ? voteYes : '-'}
+        Votos YES: {voteYes}
       </p>
     </div>
   )
