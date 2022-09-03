@@ -12,7 +12,6 @@ export const VoteButton = (
   const [ alreadyVoted, setAlreadyVoted ] = useState(-1)
 
   const votedStyles = () => {
-    console.log('value',value,'already', alreadyVoted)
     if (value === alreadyVoted && (alreadyVoted === 1  || alreadyVoted === 2)) {
       return "border-2 border-white"
     }
@@ -26,7 +25,6 @@ export const VoteButton = (
         setAlreadyVoted(Number(voted))
       } catch {
         setAlreadyVoted(0)
-        console.log('no voted')
       }
     }
   }, [ account, selectedLibrary ])
