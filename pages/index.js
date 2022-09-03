@@ -29,10 +29,10 @@ const Home = () => {
             CONTACT ME
           </a>
           {icons.map((icon, index) => (
-            <a href={icon.link} target="_blank" key={index}>
+            <a href={icon.link} target="_blank" rel="noreferrer" key={index}>
               <img
                 src={icon.image}
-                className={`w-9 h-9 relative invert-[90%] hover:scale-[135%] relative top-[-2px] mx-1.5`}
+                className={`w-9 h-9 invert-[90%] hover:scale-[135%] relative top-[-2px] mx-1.5`}
                 alt=""
               />
             </a>
