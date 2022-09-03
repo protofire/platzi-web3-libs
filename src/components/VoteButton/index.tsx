@@ -50,24 +50,24 @@ export const VoteButton = (
         className={
           `flex items-center justify-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 ${votedStyles()}`
       }>
-      <div
-        onClick={() => {voteNow()}}
-        className={
-          `inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg 
-            ${
-              value === 1 ?
-                "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200"
-                :
-                "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200"
-            }
-        `}>
-      {
-        value === 1 ? 
-            <MdClose />
-        :
-            <MdCheck />
-      }
-      </div>
+        <div
+          onClick={() => {voteNow()}}
+          className={
+            `inline-flex flex-shrink-0 justify-center items-center w-8 h-8 rounded-lg 
+              ${
+                value === 1 ?
+                  "text-red-500 bg-red-100 dark:bg-red-800 dark:text-red-200"
+                  :
+                  "text-green-500 bg-green-100 dark:bg-green-800 dark:text-green-200"
+              }
+          `}>
+        {
+          value === 1 ? 
+              <MdClose />
+          :
+              <MdCheck />
+        }
+        </div>
         <div className="ml-3 text-sm font-normal">Votes for {value === 1 ? 'No' : 'Yes' }: </div>
         <div className="ml-3 text-sm font-normal px-1 border-2 border-slate-200/10">{currentlyVotes.toString()}</div>
       </div>
