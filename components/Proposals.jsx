@@ -180,7 +180,7 @@ const Proposals = () => {
             ) : wallet.balance < 0.0101 ? (
               <button className="btn--proto--opacity !w-full" disabled={true}>
                 <p className="text-gradient text-lg font-semibold">
-                  YOU DON'T HAVE ENOUGH FUNDS
+                  YOU DONT HAVE ENOUGH FUNDS
                 </p>
               </button>
             ) : (
