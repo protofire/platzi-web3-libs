@@ -1,10 +1,13 @@
 import { Web3Provider } from '@ethersproject/providers'
 import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
+import {Contract} from 'web3-eth-contract';
 import { Provider, Votes } from './Provider'
 // T = Web3 | Web3Provider
 
 export class Web3JS implements Provider<Web3> {
   library: Web3
+  contract?: Contract
 
   constructor(provider: any) {
     this.library = new Web3(provider) as Web3
@@ -18,11 +21,15 @@ export class Web3JS implements Provider<Web3> {
     return  Number(await this.library.eth.getBalance(account!!))
   }
 
-  getContract(): any {
-
+  contractInstance(abi:AbiItem[], address: string): any {
+    this.contract = new this.library.eth.Contract(abi, address)
+    return this.contract
   }
 
-  getVotes() : Votes {
-    return {voteForYes:0, voteForNo: 0}
+  async getVotes() : Promise<Votes> {
+    const votesForNo: Number = Number(await this.contract?.methods.votesForNo().call())
+    const votesForYes: Number = Number(await this.contract?.methods.votesForYes().call())
+    console.log('Votes in web3js',votesForYes, votesForNo)
+    return {voteForYes:votesForNo, voteForNo: votesForYes}
   }
 }

@@ -1,11 +1,24 @@
-import { useCallback, useEffect, useState, createContext }from 'react';
+import { useCallback, useEffect, useState, useMemo, createContext }from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { Providers, connector } from './config/web3'
-///import { Home } from './views/Home'
+import { Home } from './views/Home'
+import { ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI } from './config/artifacts'
 import { Header } from './components/Header'
+
+
+type Library = {
+  active: boolean,
+  error?: Error, 
+  activate?: any,
+  deactivate?: () => void,
+  account?: null | string,
+  chainId?: number,
+  selectedLibrary : any,
+  setSelectedLibrary:any 
+}
 
 enum ConnectorNames {
   Injected = 'MetaMask',
@@ -24,16 +37,22 @@ const doSwitchLibrary = (isWeb3Library:any, setSelectedLibrary:any, library:any 
 }
 
 
+export const LibraryContext = createContext<Library>({
+  active: false,
+  error: undefined,
+  activate: undefined,
+  deactivate: undefined,
+  account: undefined,
+  chainId: undefined,
+  selectedLibrary: undefined ,
+  setSelectedLibrary: undefined 
+});
+
 function App() {
-  const { active, error, activate, deactivate, account, library} = useWeb3React<Providers>()
+  const { active, error, activate, deactivate, account, library, chainId } = useWeb3React<Providers>()
   const [ selectedLibrary, setSelectedLibrary ] = useState(library?.web3)
   const [ switchLibrary, setSwitchLibrary] = useState(true)
   const [ balance, setBalance ] = useState(0)
-
-  const LibraryContext = createContext({
-    selectedLibrary,
-    setSelectedLibrary 
-  });
 
   const connect = useCallback(()  => {
     localStorage.setItem('previouslyConnected', 'true')
@@ -70,11 +89,18 @@ function App() {
     doSwitchLibrary(switchLibrary,setSelectedLibrary, library)
   }, [switchLibrary, library, setSelectedLibrary])
 
+  useMemo(
+    () => {
+      if (active && selectedLibrary && chainId) {
+        return selectedLibrary.contractInstance(ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI!!)
+      }
+    },
+    [ active, chainId, selectedLibrary, PROPOSAL_CONTRACT_ADDRESS_GOERLI]
+  )
 
-  //<Home />
   return (
     <div className="App">
-      <LibraryContext.Provider value={{selectedLibrary,setSelectedLibrary}}>
+      <LibraryContext.Provider value={{active, account, activate, error, deactivate, chainId, selectedLibrary,setSelectedLibrary}}>
       <Header />
       <input 
         checked={switchLibrary}
@@ -82,6 +108,7 @@ function App() {
         onChange={() => { setSwitchLibrary(!switchLibrary) }}
       />
       <header className="App-header">
+        <Home />
         {
           active ?
             <div>
