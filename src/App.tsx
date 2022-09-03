@@ -69,10 +69,10 @@ function App() {
   return (
     <div className="App">
       <LibraryContext.Provider value={{active, account, activate, error, deactivate, chainId, selectedLibrary,setSelectedLibrary}}>
-      <Header />
-      <header className="App-header">
-        <Home switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
-      </header>
+        <Header />
+        <div className="App-body">
+          <Home switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
+        </div>
       </LibraryContext.Provider>
     </div>
   );
