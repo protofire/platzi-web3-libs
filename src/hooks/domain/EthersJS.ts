@@ -38,17 +38,24 @@ export class EthersJS implements Provider<Web3Provider> {
   }
 
   async sendVote(account: string, vote: VoteType) : Promise<VoteResponse> {
-    const voteResult = await this.contract?.methods.vote().send({
-      from: account,
-      gas: GAS_PRICE_LIMIT,
-      value: await this.getVoteFee()
-    }).on('receipt', () => {
-      return true;
-    }).catch(() => {
-      return false;
-    })
 
-    return { message: '', result: false };
+    try { 
+      const voteTx = await this.contract?.vote(vote, {
+        from: account,
+        gasLimit: GAS_PRICE_LIMIT,
+        value: await this.getVoteFee()
+      })
+      await voteTx.wait()
+      return {
+        message: "sended",
+        result: true
+      };
+    } catch {
+      return {
+        message: "error",
+        result: false 
+      };
+    }
   }
 
   async getVoteFee() : Promise<Number> {
