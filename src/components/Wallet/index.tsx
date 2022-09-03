@@ -68,7 +68,7 @@ export const Wallet = () => {
         :
         Object.keys(connectorsByName).map((name) => {
           return (
-            <Button useStyle="connect" onClick={connect} text="Connect" />
+            <Button key={name} useStyle="connect" onClick={connect} text="Connect" />
           )
         })
     }

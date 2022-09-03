@@ -34,19 +34,19 @@ export const Dashboard = ({selectedLibrary} : any) => {
           <div>
             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lime-600 bg-red-200">
               No
-              {` ${(voteNo/totalVotes*100).toFixed(2)}%`}
+              {` ${ totalVotes === 0 ? 0 : (voteNo/totalVotes*100).toFixed(2) }%`}
             </span>
           </div>
           <div className="text-right">
             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lime-600 bg-lime-200">
               Yes
-              {` ${(voteYes/totalVotes*100).toFixed(2)}%`}
+              {` ${ totalVotes === 0 ? 0 : (voteYes/totalVotes*100).toFixed(2) }%`}
             </span>
             <span className="text-xs font-semibold inline-block text-lime-600">
             </span>
           </div>
         </div>
-        <div className="overflow-hidden h-2.5 text-xs flex rounded my-2">
+        <div className="overflow-hidden h-2.5 text-xs flex rounded my-2 bg-gray-800 dark:bg-gray-600">
           <div style={{"width":`${voteNo/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
           <div style={{"width":`${voteYes/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lime-500"></div>
         </div>
