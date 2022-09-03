@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+html,
+body {
+  @apply font-SpartanLeague;
+}
+
+:root {
+  --primary: #131f3e;
+  --secondary: #f54703;
+  --secondaryOpacity: rgba(245, 71, 3, 0.5);
+  --secondaryLight: #f89202;
+  --secondaryLighter: hsl(41, 98%, 52%);
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+.text-gradient {
+  color: var(--secondary);
+  filter: opacity(0.95);
+}
+
+.text-gradient:not(:hover) {
+  background: -webkit-linear-gradient(0deg, var(--secondary), var(--secondaryLighter));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: opacity(1);
+}
+
+.switcher > div:nth-child(1) {
+  @apply !bg-gradient-to-tr !from-purple-800 !to-purple-500;
+}
+.switcherActive > div:nth-child(1) {
+  @apply !bg-gradient-to-tr !from-secondary !to-secondaryLight;
+}
+.switcher > div:nth-child(2) {
+  width: 34px !important;
+  height: 34px !important;
+  position: relative;
+  top: 2px !important;
+  left: 2px !important;
+}
+.switcherActive > div:nth-child(2) {
+  transform: translateX(85px) !important; /* 100px -1 - 28/2 = 99 - 14 = 84 */
+}
+
+nav > div > a {
+  @apply hover:text-white;
+}
+
+.btn {
+  @apply text-white font-bold rounded-sm text-xl flex items-center justify-center h-[3.3rem] w-[13rem];
+}
+.btn--proto {
+  @apply btn bg-gradient-to-tr from-secondary to-secondaryLight;
+  filter: drop-shadow(0px 5px 40px var(--secondaryOpacity));
+  @apply hover:to-secondary;
+}
+.btn--proto--opacity {
+  @apply btn--proto !from-secondary/30 !to-secondaryLight/30;
+  @apply hover:!from-secondary/20 hover:!to-secondaryLight/20;
+}
+.btn--proto--opacity:disabled {
+  @apply hover:!from-secondary/30 hover:!to-secondaryLight/30;
+}
+
+.swiper-container-free-mode > .swiper-wrapper {
+  transition-timing-function: linear;
+}
+.swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+}
