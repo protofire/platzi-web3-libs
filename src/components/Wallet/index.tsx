@@ -52,16 +52,16 @@ export const Wallet = () => {
   }, [active, getBalance])
 
   return (
-    <div>
+    <div className="mt-2 h-20">
     {
       active && account ?
-        <div className="mr-5">
-          <p className="">
+        <>
+          <p>
             <span className="bg-slate-300 p-2 rounded-md">{walletParse(account)}</span>
             <span className="bg-amber-300 p-2 ml-1 rounded-md">{balance} ETH</span>
           </p>
           <Button useStyle="disconnect" onClick={disconnect} text="Disconnect" />
-        </div>
+        </>
       : 
       isUnsupportedChain ? 
         'Network unsupported - Use Goerli'

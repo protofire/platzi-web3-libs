@@ -7,7 +7,6 @@ import { Providers, connector } from './config/web3'
 import { Home } from './views/Home'
 import { ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI } from './config/artifacts'
 import { Header } from './components/Header'
-import { Switch } from "./components/Switch"
 
 
 type Library = {
@@ -52,7 +51,7 @@ export const LibraryContext = createContext<Library>({
 function App() {
   const { active, error, activate, deactivate, account, library, chainId } = useWeb3React<Providers>()
   const [ selectedLibrary, setSelectedLibrary ] = useState(library?.web3)
-  const [ switchLibrary, setSwitchLibrary] = useState(true)
+  const [ switchLibrary, setSwitchLibrary ] = useState(true)
 
   useEffect(() => {
     doSwitchLibrary(switchLibrary,setSelectedLibrary, library)
@@ -72,8 +71,7 @@ function App() {
       <LibraryContext.Provider value={{active, account, activate, error, deactivate, chainId, selectedLibrary,setSelectedLibrary}}>
       <Header />
       <header className="App-header">
-        <Switch switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
-        <Home />
+        <Home switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
       </header>
       </LibraryContext.Provider>
     </div>
