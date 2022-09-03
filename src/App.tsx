@@ -61,8 +61,8 @@ function App() {
 
   const getBalance = useCallback(async () => {
     let balance : number;
-    balance = Number((Number(await selectedLibrary?.getBalance(account!!)) / 1e18).toFixed(2));
-    console.log(balance, selectedLibrary, await selectedLibrary?.getBalance(account!!))
+    balance = (await selectedLibrary?.getBalance(account!!)) as number ?? 0 
+    balance = Number(( balance / 1e18).toFixed(2));
     setBalance(balance)
   }, [ selectedLibrary, account ])
 
@@ -91,11 +91,11 @@ function App() {
 
   useMemo(
     () => {
-      if (active && selectedLibrary && chainId) {
+      if (active && selectedLibrary && chainId && PROPOSAL_CONTRACT_ADDRESS_GOERLI) {
         return selectedLibrary.contractInstance(ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI!!)
       }
     },
-    [ active, chainId, selectedLibrary, PROPOSAL_CONTRACT_ADDRESS_GOERLI]
+    [ active, chainId, selectedLibrary ]
   )
 
   return (
