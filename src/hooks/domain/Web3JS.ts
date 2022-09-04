@@ -41,12 +41,12 @@ export class Web3JS implements Provider<Web3> {
       value: voteFee // 0.01 ETH
     }).on('receipt', () => {
       return {
-        message: "sended",
+        message: "Transaction send successfull",
         result: true
       };
     }).on('error', (e: any) => {
       return {
-        message: "error",
+        message: "Fail send transaction",
         result: false 
       };
     })

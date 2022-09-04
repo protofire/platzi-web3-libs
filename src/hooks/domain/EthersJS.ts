@@ -52,7 +52,7 @@ export class EthersJS implements Provider<Web3Provider> {
     } catch (error) {
       console.log(error)
       return {
-        message: "error",
+        message: "Fail send transaction",
         result: false 
       };
     }

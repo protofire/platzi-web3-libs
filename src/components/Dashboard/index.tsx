@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import {VoteButton} from '../VoteButton'
-import { MdCheck, MdClose } from 'react-icons/md'
+import { VoteSection } from "../VoteSection"
 
 export const Dashboard = ({active, selectedLibrary} : any) => {
 
@@ -10,6 +9,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
   const [ alreadyVoted, setAlreadyVoted ] = useState(-1)
   const [ voting , setVoting ] = useState(false) 
   const [ voteCasted, setVoteCasted ] = useState(false)
+  const [alertMessage, setAlertMessage ] = useState('')
 
   const getVotes = useCallback(async () => {
     if(selectedLibrary?.contract) {
@@ -60,21 +60,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
             alreadyVoted > 0 ?
               <p className="text-md">Thanks for voting</p>
           :
-          <div>
-            <div className="mb-8">
-              <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 flex-inline no-wrap">
-                Click into the 
-                  <span> <MdClose className="inline text-red-400" /> </span>
-                or 
-                  <span> <MdCheck className="inline text-lime-400"/> </span>
-                to vote
-              </p>
-            </div>
-            <div className="flex no-wrap items-center">
-              <VoteButton value={1} currentlyVotes={voteNo} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
-              <VoteButton value={2} currentlyVotes={voteYes} voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} />
-            </div>
-          </div>
+          <VoteSection voting={voting} setVoting={setVoting} setAlreadyVoted={setAlreadyVoted} setAlertMessage={setAlertMessage} alertMessage={alertMessage} />
         }
        </div>
 

@@ -5,10 +5,9 @@ import { VoteResponse } from "../../hooks/domain/Provider"
 
 
 export const VoteButton = (
-  { value, voting, setVoting, currentlyVotes, setAlreadyVoted } : { value: Number, currentlyVotes: Number, voting: any, setVoting: any, setAlreadyVoted: any }
+  { value, voting, setVoting, setAlreadyVoted, setAlertMessage } : { value: Number, voting: any, setVoting: any, setAlreadyVoted: any, setAlertMessage: any }
 ) => {
   const { active, account, selectedLibrary } =  useContext(LibraryContext)
-
 
   const alreadyVotedCallback = useCallback(async () => {
     if(selectedLibrary?.contract) {
@@ -19,7 +18,7 @@ export const VoteButton = (
         setAlreadyVoted(0)
       }
     }
-  }, [ account, selectedLibrary ])
+  }, [ account, selectedLibrary, setAlreadyVoted ])
 
   useEffect(() => {
     alreadyVotedCallback()
@@ -31,8 +30,14 @@ export const VoteButton = (
     ) {
       setVoting(true)
       try {
-        await selectedLibrary.sendVote(account, value)
-      } catch (error) {
+        const voteResponse : VoteResponse = await selectedLibrary.sendVote(account, value)
+        if (!voteResponse.result) {
+          console.log('if', voteResponse.message)
+          setAlertMessage(voteResponse.message)
+        }
+      } catch (error: any) {
+        console.log('catch', error)
+        setAlertMessage(error?.message ?? 'Failed send transaction')
       }
       setVoting(false)
     }
