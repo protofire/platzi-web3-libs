@@ -64,8 +64,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
         }
        </div>
 
-
-      <div className="my-5">
+      <div className="my-5 mx-10">
         <div className="flex mb-2 items-center justify-between">
           <div>
             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-700/70 bg-red-200">
@@ -88,5 +87,6 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
         </div>
       </div>
     </div>
+
   )
 }
