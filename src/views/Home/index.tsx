@@ -20,7 +20,7 @@ export const Home = ({switchLibrary, setSwitchLibrary} : any) => {
           The contract was deployed at Goerli Test Network, and you can review it here: 
         </p>
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-          <a className="text-gray-900 dark:text-gray-200" href="https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code">
+          <a className="text-gray-900 dark:text-gray-200 hover:text-amber-300" href="https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code">
             {` Etherscan Proposal Platzi Challenge`}
           </a>
         </p>
