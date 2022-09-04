@@ -41,7 +41,7 @@ export class EthersJS implements Provider<Web3Provider> {
 
     try { 
       const voteTx = await this.contract?.vote(vote, {
-        value: Number(await this.getVoteFee()),
+        value: await this.getVoteFee(),
         gasLimit: GAS_PRICE_LIMIT
       })
       await voteTx.wait()
@@ -50,6 +50,7 @@ export class EthersJS implements Provider<Web3Provider> {
         result: true
       };
     } catch (error) {
+      console.log(error)
       return {
         message: "error",
         result: false 
