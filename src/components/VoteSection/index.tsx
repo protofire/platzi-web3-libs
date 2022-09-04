@@ -2,7 +2,6 @@ import { VoteButton } from "../VoteButton"
 import { MdCheck, MdClose, MdWarning } from 'react-icons/md'
 
 export const VoteSection = ({voting, setVoting, setAlreadyVoted, setAlertMessage, alertMessage} : any) => {
-  console.log('alert', alertMessage)
 
   return (
     <div>

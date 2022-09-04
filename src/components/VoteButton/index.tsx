@@ -32,11 +32,9 @@ export const VoteButton = (
       try {
         const voteResponse : VoteResponse = await selectedLibrary.sendVote(account, value)
         if (!voteResponse.result) {
-          console.log('if', voteResponse.message)
           setAlertMessage(voteResponse.message)
         }
       } catch (error: any) {
-        console.log('catch', error)
         setAlertMessage(error?.message ?? 'Failed send transaction')
       }
       setVoting(false)
