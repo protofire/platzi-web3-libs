@@ -8,7 +8,7 @@ When a user opens the page, it should see the result so far (number of positive 
 
 The app should consist only of a frontend. It should work in Görli and with MetaMask.
 
-The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
+The  contract is already deployed at  `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
 
 
 ## Stack and tools
