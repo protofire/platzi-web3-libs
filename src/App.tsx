@@ -31,7 +31,6 @@ const connectorsByName: { [key: string]: AbstractConnector } = {
 const doSwitchLibrary = (isWeb3Library:any, setSelectedLibrary:any, library:any ) => {
     if (!isWeb3Library) {
       setSelectedLibrary(library.ethers)
-      localStorage.setItem('librarySelected', 'ethers')
     } else {
       setSelectedLibrary(library?.web3)
       localStorage.setItem('librarySelected', 'web3')
@@ -58,12 +57,6 @@ function App() {
   const [ switchLibrary, setSwitchLibrary ] = useState(!libraryStorage || libraryStorage === 'web3' ? true : false)
 
   useEffect(() => {
-    if (!libraryStorage) {
-       localStorage.setItem('librarySelected', 'web3')
-    }
-  }, [])
-
-  useEffect(() => {
     if (library) {
       doSwitchLibrary(switchLibrary,setSelectedLibrary, library)
     }
@@ -71,11 +64,11 @@ function App() {
 
   useMemo(
     () => {
-      if (active && selectedLibrary && chainId && PROPOSAL_CONTRACT_ADDRESS_GOERLI) {
+      if (selectedLibrary && chainId && PROPOSAL_CONTRACT_ADDRESS_GOERLI) {
         return selectedLibrary.contractInstance(ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI!!)
       }
     },
-    [ active, chainId, selectedLibrary ]
+    [ chainId, selectedLibrary ]
   )
 
   return (

@@ -20,7 +20,12 @@ export const Home = ({switchLibrary, setSwitchLibrary} : any) => {
 
       <Switch switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
 
-      <Dashboard active={active} selectedLibrary={selectedLibrary} />
+      {
+        active ?
+          <Dashboard active={active} selectedLibrary={selectedLibrary} />
+          :
+          <p className="">Connect your wallet</p>
+      }
     </div>
   )
 }

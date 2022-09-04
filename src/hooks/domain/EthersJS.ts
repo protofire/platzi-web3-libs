@@ -30,7 +30,6 @@ export class EthersJS implements Provider<Web3Provider> {
   async getVotes() : Promise<Votes> {
     const votesForNo = Number(await this.contract?.votesForNo())
     const votesForYes = Number(await this.contract?.votesForYes())
-    console.log('Votes in web3js',votesForYes, votesForNo)
     return {
       voteForYes: votesForYes,
       voteForNo: votesForNo
