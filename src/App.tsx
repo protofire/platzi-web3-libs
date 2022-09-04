@@ -31,6 +31,7 @@ const connectorsByName: { [key: string]: AbstractConnector } = {
 const doSwitchLibrary = (isWeb3Library:any, setSelectedLibrary:any, library:any ) => {
     if (!isWeb3Library) {
       setSelectedLibrary(library.ethers)
+      localStorage.setItem('librarySelected', 'ethers')
     } else {
       setSelectedLibrary(library?.web3)
       localStorage.setItem('librarySelected', 'web3')

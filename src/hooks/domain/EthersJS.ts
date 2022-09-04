@@ -1,5 +1,5 @@
 import { Web3Provider } from '@ethersproject/providers'
-import { Contract, ContractInterface } from "ethers"
+import { Contract, ContractInterface, utils } from "ethers"
 import { AbiItem } from 'web3-utils'
 import { Provider, Votes, VoteType, VoteResponse, GAS_PRICE_LIMIT } from './Provider'
 // T = Web3 | Web3Provider
@@ -65,13 +65,17 @@ export class EthersJS implements Provider<Web3Provider> {
     return await this.contract?.getVote(account)
   }
 
-  async getVoteCastEvent()  {
+  getVoteCastEvent(callbackEvent: any)  :void {
     const options = {
-      filter: {
-        value: []
-      },
-      fromBlock: 0
+      address: this.contract?.address,
+      topics: [
+        utils.id('VoteCasted(uint256,address,uint256)')
+
+      ]
     }
-    return await this.contract?.events.VoteCasted(options)
+    this.contract?.provider.on(options, () => {
+        callbackEvent()
+    })
   }
+
 }
