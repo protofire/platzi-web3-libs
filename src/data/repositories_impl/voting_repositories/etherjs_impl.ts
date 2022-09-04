@@ -25,7 +25,6 @@ export class EthersjsGateway implements VotingRepository {
     console.log("# Using EtherJs Library");
     const contract = this.getUnsignedContract();
     const vote = await contract.getVote(address);
-    console.log(vote.toString());
     return vote.toString();
   }
 
@@ -54,11 +53,13 @@ export class EthersjsGateway implements VotingRepository {
     const signer = this.provider.getSigner();
     const contract = new Contract(this.contract_address, contractABI, signer);
     const fee = await contract.VOTE_FEE();
-    await contract.vote(vote, { value: fee });
+    const transaction = await contract.vote(vote, { value: fee });
+    const result = await transaction.wait();
+    return result;
   }
 
   async connectWallet() {
-    await this.provider.send("wallet_requestPermissions", [
+    await this.provider.send("eth_requestAccounts", [
       {
         eth_accounts: {},
       },

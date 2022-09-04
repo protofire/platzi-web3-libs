@@ -6,7 +6,8 @@ export class VotingService {
   }
 
   async makeVote(vote: string) {
-    await this.voting_repository.makeVote(vote);
+    const result = await this.voting_repository.makeVote(vote);
+    return result;
   }
 
   async connectWallet() {
@@ -30,6 +31,6 @@ export class VotingService {
 
   async getVote(address: string) {
     const result = await this.voting_repository.getVote(address);
-    return result
+    return result;
   }
 }

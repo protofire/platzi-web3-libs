@@ -1,5 +1,5 @@
 export interface VotingRepository {
-  makeVote(vote: string): Promise<void>;
+  makeVote(vote: string): Promise<String>;
   connectWallet(): Promise<void>;
   getAddress(): Promise<string>;
   getVote(address: string): Promise<string>;

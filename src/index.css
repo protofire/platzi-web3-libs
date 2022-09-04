@@ -14,3 +14,9 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+.normalize {
+  margin: 0;
+  --bs-gutter-y: 0;
+  --bs-gutter-x: 0;
+}

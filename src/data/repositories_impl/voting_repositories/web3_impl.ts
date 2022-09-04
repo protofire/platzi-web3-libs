@@ -55,10 +55,11 @@ export class Web3Gateway implements VotingRepository {
     const contract = this.getUnsignedContract();
     const fee = await contract.methods.VOTE_FEE().call();
     const address = await this.getAddress();
-    await contract.methods.vote(vote).send({
+    const result = await contract.methods.vote(vote).send({
       from: address,
       value: fee,
     });
+    return result;
   }
 
   async connectWallet() {

@@ -1,9 +1,12 @@
 import React from "react";
 import "./ChallengeBanner.css";
 
-const protofire_img = new URL('../../../../assets/protofire.webp', import.meta.url).href
-const platzi_img = new URL('../../../../assets/Platzi.webp', import.meta.url).href
-
+const protofire_img = new URL(
+  "../../../../assets/protofire.webp",
+  import.meta.url
+).href;
+const platzi_img = new URL("../../../../assets/Platzi.webp", import.meta.url)
+  .href;
 
 export function ChallengerBanner() {
   return (
@@ -42,7 +45,12 @@ export function ChallengerBanner() {
       </h2>
 
       <h2 className="challenge-subtitle mt-5">Powered By:</h2>
-      <img src={protofire_img} alt="protofire_logo" className="sponsor mx-2" />
+      <img
+        src={protofire_img}
+        alt="protofire_logo"
+        className="sponsor mx-2"
+        onClick={() => window.open("https://protofire.io/")}
+      />
       <img
         src={platzi_img}
         alt="platzi_logo"

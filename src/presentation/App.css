@@ -1,9 +1,0 @@
-.normalize {
-  margin: 0;
-  --bs-gutter-y: 0;
-  --bs-gutter-x: 0;
-}
-
-.app-container {
-  height: 95vh;
-}

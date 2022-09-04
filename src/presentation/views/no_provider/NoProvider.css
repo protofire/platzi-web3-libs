@@ -1,0 +1,22 @@
+.no-provider {
+  height: 95vh;
+}
+
+.no-provider-title {
+  font-size: xx-large;
+}
+.no-provider-subtitle {
+  font-size: x-large;
+}
+.metamask-img {
+  width: 250px;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+.metamask-img:hover {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+}
