@@ -20,7 +20,9 @@ module.exports = function override(config) {
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
     }),
-    new Dotenv() 
+    new Dotenv({
+      systemvars: true
+    }) 
   ]);
 
   return config;

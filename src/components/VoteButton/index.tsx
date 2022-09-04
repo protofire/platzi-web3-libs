@@ -31,7 +31,6 @@ export const VoteButton = (
     ) {
       setVoting(true)
       try {
-        console.log('weqweqwe', selectedLibrary)
         await selectedLibrary.sendVote(account, value)
       } catch (error) {
       }
