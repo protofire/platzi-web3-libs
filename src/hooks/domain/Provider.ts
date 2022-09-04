@@ -28,5 +28,6 @@ export interface Provider<T>{
   sendVote(address: string, vote: VoteType): Promise<VoteResponse>
   getVoteAccount(account: string) : Promise<VoteType>
   getVoteFee(): Promise<Number>
+  getVoteCastEvent(callbackEvent: any) : void
 
 }

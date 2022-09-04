@@ -62,4 +62,17 @@ export class Web3JS implements Provider<Web3> {
     return await this.contract?.methods.getVote(account).call()
   }
 
+  getVoteCastEvent(callbackEvent: any)  :void {
+    const options = {
+      filter: {
+        value: []
+      },
+      fromBlock: 0
+    }
+    this.contract?.events.VoteCasted(options)
+      .on('data', (event: any) => {
+        callbackEvent(callbackEvent)
+      })
+  }
+
 }

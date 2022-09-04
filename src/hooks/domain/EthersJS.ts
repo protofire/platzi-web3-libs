@@ -64,4 +64,14 @@ export class EthersJS implements Provider<Web3Provider> {
   async getVoteAccount(account : string) : Promise<VoteType> {
     return await this.contract?.getVote(account)
   }
+
+  async getVoteCastEvent()  {
+    const options = {
+      filter: {
+        value: []
+      },
+      fromBlock: 0
+    }
+    return await this.contract?.events.VoteCasted(options)
+  }
 }

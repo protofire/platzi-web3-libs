@@ -9,6 +9,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
   const [totalVotes, setTotalVotes] = useState(0)
   const [ alreadyVoted, setAlreadyVoted ] = useState(-1)
   const [ voting , setVoting ] = useState(false) 
+  const [ voteCasted, setVoteCasted ] = useState(false)
 
   const getVotes = useCallback(async () => {
     if(selectedLibrary?.contract) {
@@ -19,6 +20,20 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
       setTotalVotes(votes.voteForYes + votes.voteForNo)
     }
   }, [selectedLibrary])
+
+  useEffect(() => {
+    if(active && selectedLibrary) {
+      selectedLibrary.getVoteCastEvent((event: any) => {
+        setVoteCasted(true)
+        getVotes()
+        setTimeout(() => {
+          setVoteCasted(false)
+        }, 2000)
+      })
+    }
+
+  }, [active, selectedLibrary, getVotes])
+
 
   useEffect(() => {
     getVotes()
@@ -66,13 +81,13 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
 
       <div className="my-5 mx-10">
         <div className="flex mb-2 items-center justify-between">
-          <div>
+          <div className={`${voteCasted ? "animate-bounce" : ''}`}>
             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-red-700/70 bg-red-200">
               No ({voteNo})
               {` ${ totalVotes === 0 ? 0 : (voteNo/totalVotes*100).toFixed(2) }%`}
             </span>
           </div>
-          <div className="text-right">
+          <div className={`text-right ${voteCasted ? "animate-bounce" : ''}`}>
             <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-lime-600 bg-lime-200">
               Yes ({voteYes})
               {` ${ totalVotes === 0 ? 0 : (voteYes/totalVotes*100).toFixed(2) }%`}
@@ -82,7 +97,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
           </div>
         </div>
         <div className="overflow-hidden h-2.5 text-xs flex rounded my-2 bg-gray-800 dark:bg-gray-600 animate-shadow-effect">
-          <div style={{"width":`${voteNo/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+          <div style={{"width":`${voteNo/totalVotes*100}%`}} className="shadow-none  flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
           <div style={{"width":`${voteYes/totalVotes*100}%`}} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lime-500"></div>
         </div>
       </div>
