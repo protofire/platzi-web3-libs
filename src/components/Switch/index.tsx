@@ -4,10 +4,11 @@ export const Switch = ({switchLibrary, setSwitchLibrary} : any) => {
 
   const doSwitch = () => {
     setSwitchLibrary(!switchLibrary)
+    console.log('switchLibrary', switchLibrary)
     if (switchLibrary){
-      localStorage.setItem('librarySelected', 'web3')
-    } else {
       localStorage.setItem('librarySelected', 'ethers')
+    } else {
+      localStorage.setItem('librarySelected', 'web3')
     }
   }
   useEffect(() => {

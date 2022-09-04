@@ -20,21 +20,11 @@ type Library = {
   setSelectedLibrary:any 
 }
 
-enum ConnectorNames {
-  Injected = 'MetaMask',
-}
-
-const connectorsByName: { [key: string]: AbstractConnector } = {
-  [ConnectorNames.Injected]: connector,
-}
-
 const doSwitchLibrary = (isWeb3Library:any, setSelectedLibrary:any, library:any ) => {
     if (!isWeb3Library) {
       setSelectedLibrary(library.ethers)
-      localStorage.setItem('librarySelected', 'ethers')
     } else {
       setSelectedLibrary(library?.web3)
-      localStorage.setItem('librarySelected', 'web3')
     }
 }
 
@@ -80,6 +70,7 @@ function App() {
           <Home switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
         </div>
       </LibraryContext.Provider>
+      <a href="https://github.com/fkmurphy" className="text-sm text-gray-800 dark:text-gray-400">Created by Julian Murphy</a>
     </div>
   );
 }

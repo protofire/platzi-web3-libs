@@ -14,7 +14,6 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
   const getVotes = useCallback(async () => {
     if(selectedLibrary?.contract) {
       const votes = await selectedLibrary.getVotes()
-      console.log('Votos response', votes)
       setVoteNo(votes.voteForNo)
       setVoteYes(votes.voteForYes)
       setTotalVotes(votes.voteForYes + votes.voteForNo)
@@ -28,7 +27,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
         getVotes()
         setTimeout(() => {
           setVoteCasted(false)
-        }, 2000)
+        }, 1500)
       })
     }
 
@@ -58,7 +57,7 @@ export const Dashboard = ({active, selectedLibrary} : any) => {
           </div>
           </>
           :
-            alreadyVoted ?
+            alreadyVoted > 0 ?
               <p className="text-md">Thanks for voting</p>
           :
           <div>
