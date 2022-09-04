@@ -1,19 +1,34 @@
 import { useMemo } from 'react'
 import { useWeb3React } from '@web3-react/core'
+import { Contract } from '@ethersproject/contracts'
 
 // Arifacts
-import BetWei from '../../config/web3/artifacts/contract'
+import contract from '../../config/web3/artifacts/contract'
 
-const { address, abi } = BetWei
+// Context
+import { useGetGlobalContext } from '../../context/GlobalContext/useContext'
+
+const { address, abi } = contract
 
 const useContract = () => {
+  const { currentLib } = useGetGlobalContext()
   const { active, library, chainId } = useWeb3React()
 
   const contract = useMemo(() => {
-    if (active && chainId) return new library.eth.Contract(abi, (address as any)[chainId])
+    if (active && chainId) return currentLib === 'ethers'
+      ? new Contract((address as any)[chainId], abi, library.getSigner())
+      : new library.eth.Contract(abi, (address as any)[chainId])
   }, [active, chainId, library?.eth?.Contract])
 
-  return contract
+  const read = async (method: string, args: any[] = []) => {
+    const bnToDec = (val: any) => typeof val === 'object'
+      ? (val._isBigNumber ? Number(val) : val) : val
+    if (contract) return bnToDec(currentLib === 'ethers'
+      ? (await contract[method](...args))
+      : await contract.methods[method](...args).call())
+  }
+
+  return { contract, read }
 }
 
 export default useContract

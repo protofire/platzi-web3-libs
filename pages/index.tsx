@@ -1,12 +1,15 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { useWeb3React } from '@web3-react/core'
 
 // Components
 import Navbar from '../src/components/Navbar'
+import Vote from '../src/components/Vote'
+import Votes from '../src/components/Votes'
 
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
+  const { active } = useWeb3React()
   return (
     <div className={styles.container}>
       <Head>
@@ -20,6 +23,14 @@ export default function Home() {
         <h1 className="text-5xl font-bold underline">
           !Votaciones Platzi¡
         </h1>
+        {active
+          ? (<>
+            <Vote />
+            <Votes />
+          </>)
+          : <b className="mt-3 text-2xl">
+            Aun no estas conectado, por favor conecta tu walet.
+          </b>}
       </main>
 
       <footer className={styles.footer}>
@@ -28,7 +39,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by Esteban Diaz
+          Powered by Esteban Diaz para Anii 💚
         </a>
       </footer>
     </div>
