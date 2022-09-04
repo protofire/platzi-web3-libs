@@ -23,7 +23,6 @@ export class EthersJS implements Provider<Web3Provider> {
   }
 
   contractInstance(abi:AbiItem[], address: string) : any {
-    let provider = this.library?.send("eth_requestAccounts", [])
     const signer = this.library.getSigner()
     this.contract = new Contract(address, abi as ContractInterface, signer)
     return this.contract
