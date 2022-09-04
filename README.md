@@ -20,3 +20,16 @@ The only two requirements are:
 Everything else is up to you. We recommend using [web3-react](https://github.com/NoahZinsmeister/web3-react), but it's not required.
 
 You can get Görli ether [here](https://faucet.paradigm.xyz/).
+
+### DEMO SITE
+
+Demo: https://protofire-challenge-platzi.onrender.com/
+
+### STACK USED
+
+- Front Framework: React Js
+- Front Tools: Vite
+- UI Components: Chakra UI
+- State Management: Zustand
+- Web3 Librarys: Ethers.Js & Web3.Js
+- Deploy Tool: Render
