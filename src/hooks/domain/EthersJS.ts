@@ -23,7 +23,9 @@ export class EthersJS implements Provider<Web3Provider> {
   }
 
   contractInstance(abi:AbiItem[], address: string) : any {
-    this.contract = new Contract(address, abi as ContractInterface, this.library)
+    let provider = this.library?.send("eth_requestAccounts", [])
+    const signer = this.library.getSigner()
+    this.contract = new Contract(address, abi as ContractInterface, signer)
     return this.contract
   }
 
@@ -40,16 +42,15 @@ export class EthersJS implements Provider<Web3Provider> {
 
     try { 
       const voteTx = await this.contract?.vote(vote, {
-        from: account,
-        gasLimit: GAS_PRICE_LIMIT,
-        value: await this.getVoteFee()
+        value: Number(await this.getVoteFee()),
+        gasLimit: GAS_PRICE_LIMIT
       })
       await voteTx.wait()
       return {
         message: "sended",
         result: true
       };
-    } catch {
+    } catch (error) {
       return {
         message: "error",
         result: false 

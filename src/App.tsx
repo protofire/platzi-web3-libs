@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useState, useMemo, createContext }from 'react';
-import logo from './logo.svg';
+import { useEffect, useState, useMemo, createContext }from 'react';
 import './App.css';
-import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
-import { AbstractConnector } from '@web3-react/abstract-connector'
-import { Providers, connector } from './config/web3'
+import { useWeb3React } from '@web3-react/core'
+import { Providers } from './config/web3'
 import { Home } from './views/Home'
 import { ProposalContractABI, PROPOSAL_CONTRACT_ADDRESS_GOERLI } from './config/artifacts'
 import { Header } from './components/Header'
