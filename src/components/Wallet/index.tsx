@@ -64,8 +64,8 @@ export const Wallet = () => {
         </div>
       :
       isUnsupportedChain ? 
-        <div className="flex items-center mt-2 h-20">
-        'Network unsupported - Use Goerli'
+        <div className="flex items-center mt-2 h-20 text-gray-800 dark:text-gray-200">
+          Network unsupported - Use Goerli
         </div>
         :
         <div className="flex items-center mt-2 h-20">
