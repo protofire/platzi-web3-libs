@@ -14,7 +14,7 @@ export const Home = ({switchLibrary, setSwitchLibrary} : any) => {
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-green-400">Proposal Vote </span> Challenge.
         </h1>
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-          Welcome, you can enter with your Metamask wallet and vote yes or no.
+          Welcome, you can login with your Metamask wallet and vote yes or no.
         </p>
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
           The contract was deployed at Goerli Test Network, and you can review it here: 
