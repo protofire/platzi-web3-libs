@@ -26,7 +26,7 @@ export default function Navbar() {
   }, [connect])
 
   return (
-    <div className={`${styles.navbar} shadow-md`}>
+    <div className={`${styles.navbar} shadow-md bg-white`}>
       <Logo className={styles.navbar__logo} />
       <LibSelector />
       {active
