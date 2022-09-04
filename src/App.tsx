@@ -68,7 +68,7 @@ function App() {
           <Home switchLibrary={switchLibrary} setSwitchLibrary={setSwitchLibrary} />
         </div>
       </LibraryContext.Provider>
-      <a href="https://github.com/fkmurphy" className="text-sm text-gray-800 dark:text-gray-400">Created by Julian Murphy</a>
+      <a href="https://github.com/fkmurphy" className="text-sm text-gray-800 dark:text-gray-400">Created by <span className="text-amber-300">Julian Murphy</span></a>
     </div>
   );
 }
