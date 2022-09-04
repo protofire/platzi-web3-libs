@@ -1,0 +1,17 @@
+.navbar {
+  position: fixed;
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  &__logo {
+    margin-left: 5rem;
+  }
+  button, div {
+    margin-right: 5rem;
+  }
+}

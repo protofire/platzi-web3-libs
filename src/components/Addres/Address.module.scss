@@ -1,0 +1,12 @@
+.address {
+  width: 150px;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    width: 120px;
+  }
+}
