@@ -27,11 +27,11 @@ export const VoteButton = (
 
   const voteNow = async () => {
     if (
-      //alreadyVoted === 0 &&  TODO temporal disabled
       !voting && active && account && selectedLibrary
     ) {
       setVoting(true)
       try {
+        console.log('weqweqwe', selectedLibrary)
         await selectedLibrary.sendVote(account, value)
       } catch (error) {
       }

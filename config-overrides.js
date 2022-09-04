@@ -1,14 +1,10 @@
 const webpack = require("webpack");
-const dotenv = require("dotenv")
+const Dotenv = require('dotenv-webpack');
+
 //https://web3auth.io/docs/troubleshooting/webpack-issues
 
 module.exports = function override(config) {
-  const env = dotenv.config();
   const fallback = config.resolve.fallback || {};
-  const envs = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next])
-    return prev
-  }, {})
   Object.assign(fallback, {
     crypto: require.resolve("crypto-browserify"),
     stream: require.resolve("stream-browserify"),
@@ -24,7 +20,7 @@ module.exports = function override(config) {
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
     }),
-    new webpack.DefinePlugin(envs)
+    new Dotenv() 
   ]);
 
   return config;
