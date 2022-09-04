@@ -8,10 +8,13 @@ export const useGlobalContext = () => {
   const [currentLib, setCurrentLib] = useState(
     LIBS_PROVIDER[0]
   )
+  const [loading, setLoading] = useState(false)
 
   return {
     currentLib,
-    setCurrentLib
+    setCurrentLib,
+    loading,
+    setLoading
   }
 }
 

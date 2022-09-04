@@ -5,6 +5,9 @@ import { AppProps } from 'next/app'
 import GlobalContext from '../src/context/GlobalContext'
 import { useGlobalContext } from '../src/context/GlobalContext/useContext'
 
+// Components
+import Loader from '../src/components/Loader'
+
 // Libraries orquestation
 import { getLibrary } from '../src/config/web3'
 
@@ -15,6 +18,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <GlobalContext.Provider value={ctx}>
       <Web3ReactProvider getLibrary={getLibrary(ctx.currentLib)}>
+        {ctx.loading && <Loader />}
         <Component {...pageProps} />
       </Web3ReactProvider>
     </GlobalContext.Provider>
