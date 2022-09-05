@@ -1,0 +1,69 @@
+.App {
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+.top {
+  animation: rotate 15s infinite linear;
+}
+
+.middle {
+  animation: rotate 18s infinite reverse linear;
+}
+
+.bottom {
+  animation: rotate 20s infinite linear;
+}
+
+.blobs {
+  transition: transform 5s;
+}
+
+.blobs:hover {
+  transform: translate(100px, 100px) scale(0);
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(100px, 100px) rotate(0deg);
+  }
+  100% {
+    transform: translate(100px, 100px) rotate(359deg);
+  }
+}
+
+.blob {
+  background: linear-gradient(to top, #339899, #78dd90);
+  width: 400px;
+  height: 400px;
+  box-shadow: 0px 0px 40px aqua;
+  animation: blob 15s linear alternate infinite, spin 100s alternate infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blob {
+  0% {
+    border-radius: 40% 50% 40% / 50% 40% 50%;
+  }
+  20% {
+    border-radius: 50% 40% 50% / 40% 50% 40%;
+  }
+  40% {
+    border-radius: 40% 50% 40% / 50% 40% 50%;
+  }
+  60% {
+    border-radius: 50% 40% 50% / 40% 50% 40%;
+  }
+  80% {
+    border-radius: 40% 50% 40% / 50% 40% 50%;
+  }
+  100% {
+    border-radius: 50% 40% 50% / 40% 50% 40%;
+  }
+}

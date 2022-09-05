@@ -1,0 +1,35 @@
+{
+  "name": "front-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.9",
+    "@chakra-ui/react": "^2.3.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@nextui-org/react": "^1.0.0-beta.10",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "add": "^2.0.6",
+    "boxicons": "^2.1.2",
+    "ethers": "^5.7.0",
+    "framer-motion": "^6",
+    "next": "12.2.5",
+    "next-themes": "^0.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "web3": "^1.7.5",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "eslint": "8.23.0",
+    "eslint-config-next": "12.2.5"
+  }
+}
