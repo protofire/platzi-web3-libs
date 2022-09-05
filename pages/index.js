@@ -9,7 +9,7 @@ export default function Home() {
   const [library, setLibrary] = useState("ethers");
   return (
     <div className={home}>
-      <LibraryOptions setLibrary={setLibrary} />
+      <LibraryOptions active={library} setLibrary={setLibrary} />
       <Vote library={library} />
     </div>
   );
