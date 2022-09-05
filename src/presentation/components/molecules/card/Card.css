@@ -1,0 +1,14 @@
+.card-container {
+  /* background-color: red; */
+  border-radius: 20px;
+  border: 5px;
+  border-style: solid;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.card-subtitle {
+  font-size: 1.5rem;
+}

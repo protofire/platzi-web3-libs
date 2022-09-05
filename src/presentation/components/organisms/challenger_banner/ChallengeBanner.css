@@ -1,0 +1,21 @@
+.challenge-title {
+  font-size: 2rem;
+}
+
+.challenge-subtitle {
+  font-size: 1.5rem;
+  text-align: justify;
+  text-justify: auto;
+}
+.icon-button {
+  cursor: pointer;
+}
+
+.sponsor {
+  width: 250px;
+  cursor: pointer;
+}
+.program {
+  width: 400px;
+  cursor: pointer;
+}
