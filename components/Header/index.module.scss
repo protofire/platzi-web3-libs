@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 3rem;
+  align-items: center;
+}
+
+.title {
+  color: $primary;
+  h3 {
+    font-weight: 600;
+    span {
+      font-weight: 400;
+    }
+  }
+}
+
+.navegation {
+  display: flex;
+  flex-direction: row;
+  p {
+    display: block;
+    border-radius: 20px;
+    background-color: $grey-70;
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    margin: 0 20px;
+    padding: 10px;
+  }
+}

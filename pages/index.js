@@ -1,9 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import LibraryOptions from "../components/LibraryOptions";
+import Vote from "../containers/Vote";
+import { home } from "./index.module.scss";
 
 export default function Home() {
+  const [library, setLibrary] = useState("ethers");
   return (
-      <p>Prueba</p>
-  )
+    <div className={home}>
+      <LibraryOptions setLibrary={setLibrary} />
+      <Vote library={library} />
+    </div>
+  );
 }
