@@ -3,13 +3,12 @@ import { AddIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { connector } from '../../../config/web3';
-import { useCallback, useEffect, useState } from 'react';
 import useTruncatedAddress from '../../../hooks/useTruncatedAddress';
+import { useCallback, useEffect } from 'react';
 
 const WalletData = () => {
-	const [balance, setBalance] = useState(0);
-	const { active, activate, deactivate, account, error, library } =
-		useWeb3React();
+	const { active, activate, deactivate, account, error } = useWeb3React();
+
 	const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 	const truncatedAddress = useTruncatedAddress(account);
 
@@ -22,15 +21,6 @@ const WalletData = () => {
 		deactivate();
 		localStorage.removeItem('previouslyConnected');
 	};
-
-	// const getBalance = useCallback(async () => {
-	// 	const toSet = await library['web3'].eth.getBalance(account);
-	// 	setBalance((toSet / 1e18).toFixed(2));
-	// }, [library?.eth, account]);
-
-	// useEffect(() => {
-	// 	if (active) getBalance();
-	// }, [active, getBalance]);
 
 	useEffect(() => {
 		if (localStorage.getItem('previouslyConnected') === 'true') connect();

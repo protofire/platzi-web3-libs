@@ -39,6 +39,7 @@ export class Web3Proposal {
     return Number(vote) || undefined
   }
 
+  // 1 no | 2 yes
   async vote(vote) {
     const fee = await this.VOTE_FEE()
     const accounts = await this.web3.eth.getAccounts()
@@ -49,6 +50,6 @@ export class Web3Proposal {
         value: Web3.utils.toWei(fee),
       })
 
-    return receipt.transactionHash
+    return receipt
   }
 }

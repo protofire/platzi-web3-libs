@@ -1,7 +1,6 @@
 import { ethers } from 'ethers'
-import { Web3Provider, TransactionResponse } from '@ethersproject/providers'
-import { Proposal, Vote } from '../types'
-import { PROPOSAL_ADDRESS, SupportedChainId } from '../constants'
+import { TransactionResponse } from '@ethersproject/providers'
+import ProposalArtifact from '../config/artifacts/proposal'
 
 // A Human-Readable ABI; for interacting with the contract, we
 // must include any fragment we wish to use
@@ -20,49 +19,49 @@ const abi = [
   'event VoteCasted(uint256 indexed proposalId, address indexed from, uint256 vote)',
 ]
 
-export class EthersProposal<T extends SupportedChainId> implements Proposal {
-  private proposalContract: ethers.Contract
-
-  constructor(public chainId: T, provider: Web3Provider) {
+export class EthersProposal {
+  constructor(chainId, provider) {
+    let contractAddress = ProposalArtifact.address[chainId]
+    let abi = ProposalArtifact.abi
     this.proposalContract = new ethers.Contract(
-      PROPOSAL_ADDRESS[chainId],
+      contractAddress,
       abi,
       provider.getSigner()
     )
   }
 
-  async proposalId(): Promise<number> {
+  async proposalId() {
     const proposalId = await this.proposalContract.proposalId()
     return proposalId.toNumber()
   }
 
-  async votesForYes(): Promise<number> {
+  async votesForYes() {
     const votesForYes = await this.proposalContract.votesForYes()
     return votesForYes.toNumber()
   }
 
-  async votesForNo(): Promise<number> {
+  async votesForNo() {
     const votesForNo = await this.proposalContract.votesForNo()
     return votesForNo.toNumber()
   }
 
-  async VOTE_FEE(): Promise<string> {
+  async VOTE_FEE() {
     const VOTE_FEE = await this.proposalContract.VOTE_FEE()
     return ethers.utils.formatEther(VOTE_FEE)
   }
 
-  async getVote(): Promise<Vote | undefined> {
+  async getVote() {
     const address = await this.proposalContract.signer.getAddress()
     const vote = await this.proposalContract.getVote(address)
     return vote.toNumber() || undefined
   }
 
-  async vote(vote: Vote): Promise<string> {
+  // 1 no | 2 yes
+  async vote(vote) {
     const fee = await this.VOTE_FEE()
-    const tx: TransactionResponse = await this.proposalContract.vote(vote, {
+    const tx = await this.proposalContract.vote(vote, {
       value: ethers.utils.parseEther(fee),
     })
-
-    return tx.hash
+    return tx
   }
 }
