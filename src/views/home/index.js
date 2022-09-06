@@ -1,140 +1,75 @@
-import {
-	Center,
-	Heading,
-	SimpleGrid,
-	Text,
-	Button,
-	VStack,
-	Spinner,
-	Badge,
-	Box,
-	useToast,
-} from '@chakra-ui/react';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { useWeb3React } from '@web3-react/core';
-import { LibContext } from '../../App';
-import useLibsAvailables from '../../hooks/useLibsAvailables';
-import useProposal from '../../hooks/useProposal';
+import { Center, List, ListItem, ListIcon, Heading, Button, Switch } from '@chakra-ui/react';
+import { CheckCircleIcon, InfoIcon } from '@chakra-ui/icons';
+import { useState } from 'react';
+// import { useCallback, useContext, useEffect, useState } from 'react';
+// import { useWeb3React } from '@web3-react/core';
+// import { LibContext } from '../../App';
+// import useLibsAvailables from '../../hooks/useLibsAvailables';
+// import useProposal from '../../hooks/useProposal';
+import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
+import { connector } from '../../config/web3';
+import truncated from '../../utils/truncated';
+
 
 const Home = () => {
-	const { lib } = useContext(LibContext);
-	const { active, library, chainId } = useWeb3React();
-	const libsAvailables = useLibsAvailables();
-	const proposalContract = useProposal(lib, active, library, chainId);
-	const [proposalId, setProposalId] = useState();
-	const [votesForNo, setVotesForNo] = useState();
-	const [votesForYes, setVotesForYes] = useState();
-	const [fee, setFee] = useState();
-	const toast = useToast();
+	const { active, activate, deactivate, account, error, library } =
+      useWeb3React();
+	const [isConnected, setIsConnected] = useState(false);
+	const [isLib, setIsLib] = useState(false);
 
-	const getProposalData = useCallback(async () => {
-		console.log('Getting data');
-		console.log('> Contract', proposalContract, '> Active', active);
-		if (active && proposalContract) {
-			const idToSet = await proposalContract.proposalId();
-			const yesToSet = await proposalContract.votesForYes();
-			const noToSet = await proposalContract.votesForNo();
-			const feeToSet = await proposalContract.VOTE_FEE();
-			setFee(feeToSet);
-			setProposalId(idToSet);
-			setVotesForYes(yesToSet);
-			setVotesForNo(noToSet);
-			console.log('> data:', idToSet, yesToSet, noToSet);
-		} else {
-			setProposalId();
-			setVotesForYes();
-			setVotesForNo();
-		}
-	}, [active, proposalContract]);
+	const isUnsupportedChain = error instanceof UnsupportedChainIdError;
 
-	useEffect(() => getProposalData, [getProposalData]);
+	const handleConnect = () => {
+		activate(connector);
+	}
 
-	useEffect(() => {
-		console.log('Instanciando libreria = ', lib);
-	}, [lib]);
-
-	const voteYes = async (event) => {
-		event.preventDefault();
-		await vote(2);
-	};
-
-	const voteNo = async (event) => {
-		event.preventDefault();
-		await vote(1);
-	};
-
-	const vote = async (event) => {
-		console.log(event);
-		if (proposalContract) {
-			try {
-				let res = proposalContract.vote(event).then((res) => {
-					getProposalData();
-					return res;
-				});
-				console.log('>res', res);
-			} catch (error) {
-				console.log('>err', error);
-			}
-		}
-	};
+	const handleDisconnect = () => {
+		deactivate();
+	}
 
 	return (
 		<>
 			<Center height={'70vh'}>
-				<Box
-					borderWidth="2px"
-					borderRadius="xl"
-					p={[10, 10]}
-					borderColor="orange"
-				>
-					<VStack spacing="24px">
-						<Heading
-							color="orange"
-							as={'span'}
-							position={'relative'}
-						>
-							Proposal # {proposalId ? proposalId : <Spinner />}
-						</Heading>
-						<Text fontSize="xl" color="white">Vote for yes or for no for this proposal</Text>
-						<Text fontSize="m" color="white">
-							Using library:{' '}
-							{lib
-								? libsAvailables[lib].name + '.js'
-								: 'Please choose a library'}
-						</Text>
-						<Text fontSize="m" color="white">
-								Fee: {fee ? fee : <Spinner />} eth
-						</Text>
-						<SimpleGrid columns={2} spacing={10}>
-							<Button
-								variant={'outline'}
-								colorScheme={'green'}
-								size={'sm'}
-								leftIcon={
-									<Badge colorScheme="green" ml={1}>
-										{votesForNo != null ? votesForYes : <Spinner />}
-									</Badge>
-								}
-								onClick={voteYes}
-							>
-								Vote Yes
-							</Button>
-							<Button
-								variant={'outline'}
-								colorScheme={'red'}
-								size={'sm'}
-								leftIcon={
-									<Badge colorScheme="red" ml={1}>
-										{votesForNo != null ? votesForNo : <Spinner />}
-									</Badge>
-								}
-								onClick={voteNo}
-							>
-								Vote No
-							</Button>
-						</SimpleGrid>
-					</VStack>
-				</Box>
+				<List spacing={3}>
+					{active ? (
+						<ListItem>
+							<ListIcon as={CheckCircleIcon} color="green.500" />
+							Wallet conectada!
+							<Button ml={3} onClick={handleDisconnect}>{truncated(account)}</Button>
+						</ListItem>
+					) : (
+						<ListItem>
+							<ListIcon as={InfoIcon} color="gray.500" />
+							Conecta tu wallet
+							<Button ml={3} onClick={handleConnect} disabled={isUnsupportedChain}>{isUnsupportedChain ? "Red no soportada" : "Conectar"}</Button>
+						</ListItem>
+					)}
+					{active ? (
+						<ListItem>
+							<ListIcon as={CheckCircleIcon} color="green.500" />
+							Elije tu librería
+							<Switch ml={3} size='md'/>
+						</ListItem>
+					) : (
+						<ListItem>
+							<ListIcon as={InfoIcon} color="gray.500" />
+							Elije tu librería
+							
+						</ListItem>
+					)}
+
+					{isLib ? (
+						<ListItem>
+							<ListIcon as={CheckCircleIcon} color="green.500" />
+							Vota por la propuesta
+						</ListItem>
+					) : (
+						<ListItem>
+							<ListIcon as={InfoIcon} color="gray.500" />
+							Para votar, conecta tu wallet y elije la librerías
+						</ListItem>
+					)}
+				</List>
 			</Center>
 		</>
 	);
