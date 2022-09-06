@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 import ProposalArtifact from '../config/artifacts/proposal'
 
+
 export class Web3Proposal {
   constructor(chainId, provider) {
     const contractAddress = ProposalArtifact.address[chainId]
@@ -53,7 +54,8 @@ export class Web3Proposal {
   
       return receipt
     } catch (error) {
-      console.log(">err", error)
+      console.log("> Error", error)
+      return error;
     }
   }
 }

@@ -1,5 +1,4 @@
 import { ethers } from 'ethers'
-import { TransactionResponse } from '@ethersproject/providers'
 import ProposalArtifact from '../config/artifacts/proposal'
 
 // A Human-Readable ABI; for interacting with the contract, we
