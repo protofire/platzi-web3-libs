@@ -42,14 +42,18 @@ export class Web3Proposal {
   // 1 no | 2 yes
   async vote(vote) {
     const fee = await this.VOTE_FEE()
-    const accounts = await this.web3.eth.getAccounts()
-    const receipt = await this.proposalContract.methods
-      .vote(vote)
-      .send({
-        from: accounts[0],
-        value: Web3.utils.toWei(fee),
-      })
-
-    return receipt
+    try {
+      const accounts = await this.web3.eth.getAccounts()
+      const receipt = await this.proposalContract.methods
+        .vote(vote)
+        .send({
+          from: accounts[0],
+          value: Web3.utils.toWei(fee),
+        })
+  
+      return receipt
+    } catch (error) {
+      console.log(">err", error)
+    }
   }
 }

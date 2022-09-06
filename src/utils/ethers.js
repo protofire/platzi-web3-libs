@@ -59,9 +59,13 @@ export class EthersProposal {
   // 1 no | 2 yes
   async vote(vote) {
     const fee = await this.VOTE_FEE()
-    const tx = await this.proposalContract.vote(vote, {
-      value: ethers.utils.parseEther(fee),
-    })
-    return tx
+    try {
+      const tx = await this.proposalContract.vote(vote, {
+        value: ethers.utils.parseEther(fee),
+      })
+      return tx
+    } catch (error) {
+      console.log(">", error)
+    }
   }
 }

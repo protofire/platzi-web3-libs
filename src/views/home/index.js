@@ -32,6 +32,11 @@ const libraries = [
 	},
 ];
 
+const utilLibs = {
+	'ethers': {Proposal: EthersProposal},
+	'web3': {Proposal: Web3Proposal}	
+}
+
 const Home = () => {
 	const { active, activate, deactivate, account, error, library, chainId } =
 		useWeb3React();
@@ -50,6 +55,10 @@ const Home = () => {
 	const handleDisconnect = () => {
 		deactivate();
 		setIsLib();
+		setIsVote(false);
+		setProposalId();
+		setVotesForNo();
+		setVotesForYes();
 	};
 
 	const handleChange = (value) => {
@@ -63,8 +72,9 @@ const Home = () => {
 
 	const getData = async () => {
 		if (active && isLib) {
-			console.log(library);
-			const proposalContract = new Web3Proposal(chainId, library[isLib]);
+			console.log(library, utilLibs[isLib]);
+			const proposalContract = new utilLibs[isLib].Proposal(chainId, library[isLib]);
+			// const proposalContract = new Web3Proposal(chainId, library[isLib]);
 			const idToSet = await proposalContract.proposalId();
 			const yesToSet = await proposalContract.votesForYes();
 			const noToSet = await proposalContract.votesForNo();
@@ -76,6 +86,33 @@ const Home = () => {
 			setProposalId('');
 		}
 		console.log('> active:', active);
+	};
+
+	const voteYes = async (event) => {
+		event.preventDefault();
+		await vote(2);
+	};
+
+	const voteNo = async (event) => {
+		event.preventDefault();
+		await vote(1);
+	};
+
+	const vote = async (event) => {
+		console.log(event);
+		if (active && isLib) {
+			try {
+				const proposalContract = new utilLibs[isLib].Proposal(chainId, library[isLib]);
+				let res = proposalContract.vote(event).then((res) => {
+					return res;
+				});
+				if (res.status) {
+					getData();
+				}
+			} catch (error) {
+				console.log('>err', error);
+			}
+		}
 	};
 
 	return (
@@ -127,8 +164,8 @@ const Home = () => {
 											{proposalId != null ? (
 												<>
 													<Text>Proposal # {proposalId}</Text>
-													<Button>Yes: {votesForYes}</Button>
-													<Button>No: {votesForNo}</Button>
+													<Button onClick={voteYes}>Yes: {votesForYes}</Button>
+													<Button onClick={voteNo}>No: {votesForNo}</Button>
 												</>
 											) : (
 
