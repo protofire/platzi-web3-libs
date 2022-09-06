@@ -1,0 +1,26 @@
+{
+  "name": "platzi-web3",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@web3-react/core": "^8.0.35-beta.0",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/metamask": "^8.0.28-beta.0",
+    "ethers": "^5.7.0",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.54.8",
+    "web3": "^1.7.5"
+  },
+  "devDependencies": {
+    "eslint": "8.23.0",
+    "eslint-config-next": "12.2.5"
+  }
+}

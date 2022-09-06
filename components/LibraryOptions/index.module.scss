@@ -1,0 +1,41 @@
+.library {
+  width: 100%;
+  background-color: $tertiary;
+  height: 40px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+
+  button {
+    position: relative;
+    z-index: 1;
+    width: 40%;
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.library::before{
+  content: ' ';
+  width: 45%;
+  height: 32px;
+  border-radius: 14px;
+  background-color: $secondary;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  left: 52.5%;
+  position: absolute;
+  transition: all 1s;
+}
+
+.ethers::before {
+  left: 2%;
+}
+
+.library::before:hover {
+  background-color: $grey-40;
+}

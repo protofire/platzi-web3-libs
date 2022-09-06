@@ -1,22 +1,34 @@
-# Platzi Web3 Exercise
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Goal
+## Getting Started
 
-Create a DApp that allows people to vote on a (binary) proposal. Each ethereum address should be allowed to vote only once and the vote should cost 0.01 ETH.
+First, run the development server:
 
-When a user opens the page, it should see the result so far (number of positive votes vs. number of negative votes). Real-time updating is a bonus, but not required.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-The app should consist only of a frontend. It should work in Görli and with MetaMask.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-## Stack and tools
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-The only two requirements are:
-1. Use React for the frontend
-2. Use [web3.js](https://web3js.readthedocs.io/) and [ethers.js](https://docs.ethers.io/). The user should be able to switch between the two libraries and everything should work the same.
+## Learn More
 
-Everything else is up to you. We recommend using [web3-react](https://github.com/NoahZinsmeister/web3-react), but it's not required.
+To learn more about Next.js, take a look at the following resources:
 
-You can get Görli ether [here](https://faucet.paradigm.xyz/).
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
