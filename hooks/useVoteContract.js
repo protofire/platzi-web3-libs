@@ -1,8 +1,8 @@
-import { useWeb3React } from "@web3-react/core";
+import { utils } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import { abi, address } from "../config/contract/data.json";
 
-export const useVoteContract = (library) => {
+export const useVoteContract = (library, provider = "") => {
   const [contract, setContract] = useState();
   const [votes, setVotes] = useState({
     yes: "-",
@@ -23,14 +23,28 @@ export const useVoteContract = (library) => {
   const ethersLibrary = useCallback(() => {
     if (typeof window !== "undefined") {
       import("ethers").then((ethers) => {
-        const provider = new ethers.providers.Web3Provider(
-          window.ethereum
-        );
-        const cont = new ethers.Contract(address, abi, provider);
+        const provi = new ethers.providers.Web3Provider(window.ethereum);
+        const cont = new ethers.Contract(address, abi, provi);
         setContract(cont);
       });
     }
   }, []);
+
+  const votos = async () => {
+    setLoading(true);
+    let no, yes;
+    if (contract) {
+      if (contract.methods) {
+        no = Number(await contract.methods.votesForNo().call());
+        yes = Number(await contract.methods.votesForYes().call());
+      } else {
+        no = Number(await contract.votesForNo());
+        yes = Number(await contract.votesForYes());
+      }
+    }
+    setVotes({ yes, no });
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (library === "web3") web3Library();
@@ -39,26 +53,34 @@ export const useVoteContract = (library) => {
   }, [library]);
 
   useEffect(() => {
-    const votos = async () => {
-      setLoading(true);
-      let no, yes;
-      if (contract) {
-        if (contract.methods) {
-          no = Number(await contract.methods.votesForNo().call());
-          yes = Number(await contract.methods.votesForYes().call());
-        } else {
-          no = Number(await contract.votesForNo());
-          yes = Number(await contract.votesForYes());
-        }
-      }
-      setVotes({ yes, no });
-      setLoading(false);
-    };
     votos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract]);
+
+  const voteFor = async (type) => {
+    if (contract) {
+      if (contract.methods) {
+        const address = await provider.getSigner().getAddress();
+        const fee = await contract.methods.VOTE_FEE().call();
+        contract.methods.vote(type).send({
+          from: address,
+          value: fee,
+        });
+      } else {
+        const fee = await contract.VOTE_FEE();
+        const contractWithSign = contract.connect(provider.getSigner());
+        contractWithSign
+          .vote(type, { value: fee })
+          .then(e => e)
+          .catch((e) => alert(e.message))
+      }
+    }
+  };
 
   return {
     contract,
     votes,
+    loading,
+    voteFor,
   };
 };

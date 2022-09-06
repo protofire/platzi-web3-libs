@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import LibraryOptions from "../components/LibraryOptions";
-import Vote from "../containers/Vote";
+import VoteContract from "../containers/VoteContract";
 import { home } from "./index.module.scss";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className={home}>
       <LibraryOptions active={library} setLibrary={setLibrary} />
-      <Vote library={library} />
+      <VoteContract library={library} />
     </div>
   );
 }
