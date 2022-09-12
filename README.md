@@ -1,4 +1,5 @@
 # Platzi Web3 Exercise
+![image](https://user-images.githubusercontent.com/23264797/189511534-75cec9d4-531c-41f7-a446-dd8453ffc77d.png)
 
 ## Goal
 
