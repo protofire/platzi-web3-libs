@@ -1,6 +1,6 @@
 # Platzi Web3 Exercise
 
-- Deploy: [protofire-platzi.vercel.app](protofire-platzi.vercel.app/)
+- Deploy: [protofire-platzi.vercel.app](https://protofire-platzi.vercel.app)
 
 ## Goal
 
