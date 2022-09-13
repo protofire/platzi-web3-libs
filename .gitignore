@@ -1,0 +1,9 @@
+#Node
+node_modules
+
+#next
+.next
+
+#yarn
+yarn-error.log
+yarn.lock
