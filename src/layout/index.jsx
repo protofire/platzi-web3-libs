@@ -51,15 +51,15 @@ const Wallet = () => {
             onClick={disconnect}
           >
             <p>{truncatedAddress}</p>
-            <p>{balance}</p>
+            <p>{balance} ETH</p>
           </button>
       ) : (
         <button
-          className=""
+          className="text-sm py-1 tracking-wider inline-block px-2 mt-5"
           onClick={connect}
           disabled={isUnsupportedChain}
         >
-          {isUnsupportedChain ? "Change to Goerli Network" : "Connect Metamask wallet"}
+          {isUnsupportedChain ? "Change to Goerli Network" : "Connect Metamask wallet to vote"}
         </button>
       )}
     </div>
@@ -68,11 +68,11 @@ const Wallet = () => {
 
 const Layout = ({ children }) => {
   return (
-    <section className="text-center px-4 py-16 mx-auto max-w-screen-lg sm:px-6 lg:px-8">
-      <h1 className="text-4xl mb-5 leading-12 lg:w-1/2 md:w-2/3 lg:px-4 m-auto mb-16">
+    <section className="text-center px-4 py-12 mx-auto max-w-screen-md sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-extrabold sm:text-5xl mb-8">
         Do you prefer decentralization over scalability?
       </h1>
-      <p className="text-sm lg:pt-0 md:pt-5 lg:w-1/2 md:w-2/3 lg:px-4 m-auto mb-16">
+      <p className="text-sm lg:pt-0 md:pt-5 lg:w-1/2 md:w-2/3 lg:px-4 m-auto mb-12">
         This poll is made up for blockchain specialists that help decentralized protocols and developer platforms to accelerate growth of their ecosystems.
       </p>
       <Wallet />

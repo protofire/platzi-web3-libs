@@ -5,7 +5,6 @@ import { useContext } from "react";
 import useProposalStatus from "@hooks/useProposalStatus";
 import { ToastContainer, toast } from 'react-toastify';
 
-
 const Home = () => {
   const { active } = useWeb3React();
   const { state, changeLibrary } = useContext(AppContext);
@@ -21,38 +20,48 @@ const Home = () => {
 
   return (
     <section>
-      <main className="py-1">
-        <div>
+      <main className="py-2">
+        <p className="mb-2 mt-4">You can choose between two methods to vote.</p>
+        <div className="flex flex-row justify-center">
           <p>Web3</p>
           <ReactSwitch
+            className="px-2"
             checked={state.library === "ethers"}
             onChange={changeLibrary}
+            uncheckedIcon= {false}
+            checkedIcon= {false}
           />
           <p>EtherJS</p>
         </div>
         {active ? (
           <>
-            <div className="grid gap-4 grid-cols-2">
-              <div className="grid justify-items-center h-full p-12">
-                <h5>Vote for yes</h5>
-                <p>{positiveVotes}</p>
-                <p>{`${percentYes}%`}</p>
+            <div className="justify-center grid gap-4 sm:grid-cols-2 p-12 mb-8">
+              <div className="w-72 border-2 border-white rounded-xl grid justify-items-center p-6 sm:p-12">
+                <h5>Votes for "YES"</h5>
+                <p className="text-2xl">
+                  {positiveVotes}
+                </p>
+                <p className="mb-2">
+                  {`${percentYes}%`}
+                </p>
                 <button
                   className="w-32"
-                  isLoading={voting}
                   disabled={isVoted}
                   onClick={() => handleVote(2)}
                 >
                   Yes
                 </button>
               </div>
-              <div className="grid justify-items-center h-full p-12">
-                <h5>Vote for no</h5>
-                <p><b>{negativesVotes}</b></p>
-                <p>{`${percentNo}%`}</p>
+              <div className="w-72 border-2 border-white rounded-xl grid justify-items-center p-6 sm:p-12">
+                <h5>Votes for "NO"</h5>
+                <p className="text-2xl">
+                  {negativesVotes}
+                </p>
+                <p className="mb-2">
+                  {`${percentNo}%`}
+                </p>
                 <button
                   className="w-32"
-                  isLoading={voting}
                   disabled={isVoted}
                   onClick={() => handleVote(1)}
                 >
@@ -61,13 +70,13 @@ const Home = () => {
               </div>
           </div>
             {isVoted ? (
-              <p>You are emitted vote for this proposal</p>
+              <p>Thanks for voting!</p>
             ) : (
-              "You can vote for the proposal"
+              "You are allowed to vote."
             )}
           </>
         ) : (
-          <div>Wallet desconectado</div>
+          <div className="mt-8">Your wallet is disconnected.</div>
         )}
       </main>
     </section>

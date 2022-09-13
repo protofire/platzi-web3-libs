@@ -1,5 +1,7 @@
 # Platzi Web3 Exercise
 
+- Deploy: [protofire-platzi.vercel.app](protofire-platzi.vercel.app/)
+
 ## Goal
 
 Create a DApp that allows people to vote on a (binary) proposal. Each ethereum address should be allowed to vote only once and the vote should cost 0.01 ETH.
