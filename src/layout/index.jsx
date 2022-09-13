@@ -55,7 +55,7 @@ const Wallet = () => {
           </button>
       ) : (
         <button
-          className="border-2 border-blue-500"
+          className=""
           onClick={connect}
           disabled={isUnsupportedChain}
         >
@@ -68,7 +68,7 @@ const Wallet = () => {
 
 const Layout = ({ children }) => {
   return (
-    <section className="text-center px-4 py-16 mx-auto max-w-screen-md sm:px-6 lg:px-8">
+    <section className="text-center px-4 py-16 mx-auto max-w-screen-lg sm:px-6 lg:px-8">
       <h1 className="text-4xl mb-5 leading-12 lg:w-1/2 md:w-2/3 lg:px-4 m-auto mb-16">
         Do you prefer decentralization over scalability?
       </h1>

@@ -33,11 +33,12 @@ const Home = () => {
         {active ? (
           <>
             <div className="grid gap-4 grid-cols-2">
-              <div className="flex flex-col justify-between h-full p-12">
+              <div className="grid justify-items-center h-full p-12">
                 <h5>Vote for yes</h5>
                 <p>{positiveVotes}</p>
                 <p>{`${percentYes}%`}</p>
                 <button
+                  className="w-32"
                   isLoading={voting}
                   disabled={isVoted}
                   onClick={() => handleVote(2)}
@@ -45,11 +46,12 @@ const Home = () => {
                   Yes
                 </button>
               </div>
-              <div className="flex flex-col justify-between h-full p-12">
+              <div className="grid justify-items-center h-full p-12">
                 <h5>Vote for no</h5>
                 <p><b>{negativesVotes}</b></p>
                 <p>{`${percentNo}%`}</p>
                 <button
+                  className="w-32"
                   isLoading={voting}
                   disabled={isVoted}
                   onClick={() => handleVote(1)}
