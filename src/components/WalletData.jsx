@@ -7,14 +7,15 @@ import {
   TagCloseButton,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { connector } from "../config/web3";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useTruncatedAddress from "../hooks/useTruncatedAddress";
+import { AppContext } from "../context/AppContext";
 
 const WalletData = () => {
   const [balance, setBalance] = useState(0);
+  const { state } = useContext(AppContext);
   const { active, activate, deactivate, account, error, library } =
     useWeb3React();
 
@@ -31,9 +32,15 @@ const WalletData = () => {
   };
 
   const getBalance = useCallback(async () => {
-    const toSet = await library.eth.getBalance(account);
+    let toSet = 0;
+    if (state.library === "web3") {
+      toSet = await library.web3.eth.getBalance(account);
+    } else {
+      toSet = await library.ethers.getBalance(account);
+    }
+
     setBalance((toSet / 1e18).toFixed(2));
-  }, [library?.eth, account]);
+  }, [library?.web3.eth, account]);
 
   useEffect(() => {
     if (active) getBalance();
@@ -44,13 +51,12 @@ const WalletData = () => {
   }, [connect]);
 
   const truncatedAddress = useTruncatedAddress(account);
-
   return (
     <Flex alignItems={"center"}>
       {active ? (
-        <Tag colorScheme="green" borderRadius="full">
+        <Tag colorScheme="purple" borderRadius="full">
           <TagLabel>
-            <Link to={`/punks?address=${account}`}>{truncatedAddress}</Link>
+            {truncatedAddress}
           </TagLabel>
           <Badge
             d={{
@@ -60,6 +66,7 @@ const WalletData = () => {
             variant="solid"
             fontSize="0.8rem"
             ml={1}
+            colorScheme='purple'
           >
             ~{balance} Ξ
           </Badge>

@@ -1,4 +1,3 @@
-import { useColorModeValue } from "@chakra-ui/react";
 import CustomLink from "../components/CustomLink";
 import {
   Box,
@@ -9,9 +8,10 @@ import {
   Stack,
   Image,
   Heading,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import WalletData from '../layout/WalletData';
+import WalletData from '../components/WalletData';
 import platziLogo from '../static/platzi.svg';
 
 const Links = [
@@ -21,7 +21,7 @@ const Links = [
   }
 ];
  
-const NavLink = () => {
+const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -85,4 +85,4 @@ const NavLink = () => {
   );
 };
 
-export default NavLink;
+export default Header;
