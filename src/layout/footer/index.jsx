@@ -7,7 +7,7 @@ import {
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
-import platziLogo from '../static/platzi.svg';
+import platziLogo from '../../static/platzi.svg';
 
 const Footer = () => {
   return (

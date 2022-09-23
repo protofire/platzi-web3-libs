@@ -1,4 +1,4 @@
-import CustomLink from "../components/CustomLink";
+import CustomLink from "../../components/CustomLink";
 import {
   Box,
   Flex,
@@ -11,8 +11,8 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import WalletData from '../components/WalletData';
-import platziLogo from '../static/platzi.svg';
+import WalletData from '../../components/WalletData';
+import platziLogo from '../../static/platzi.svg';
 
 const Links = [
   {
