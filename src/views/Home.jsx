@@ -22,7 +22,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 import { AppContext } from "../context/AppContext";
 import useProposalStatus from "../hooks/useProposalStatus";
-import { BsFillAlarmFill } from "react-icons/bs";
+import { BsFillAlarmFill } from "react-icons/Bs";
 
 const Home = () => {
   const { active } = useWeb3React();
