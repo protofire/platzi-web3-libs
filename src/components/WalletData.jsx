@@ -75,7 +75,7 @@ const WalletData = () => {
       ) : (
         <Button
           variant={"solid"}
-          colorScheme={"green"}
+          colorScheme={"purple"}
           size={"sm"}
           leftIcon={<AddIcon />}
           onClick={connect}
