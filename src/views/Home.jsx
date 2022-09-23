@@ -176,11 +176,13 @@ const Home = () => {
                 </Stat>
               </StatGroup>
               {isVoted ? (
-                <Badge mt={2} colorScheme={"green"}>
+                <Badge mt={2} colorScheme={"purple"}>
                   You Already Voted
                 </Badge>
               ) : (
-                ""
+                <Badge mt={2} colorScheme={"purple"}>
+                  You can vote NOW
+                </Badge>
               )}
             </>
           ) : (
