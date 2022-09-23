@@ -8,7 +8,7 @@ import Footer from "./Footer";
 const MainLayout = ({ children }) => {
   return (
     <Flex minH="100vh" direction="column">
-      <Header/>
+      <Header />
       <Box mx="auto" flex={1} p={4} maxW={"7xl"} width="100%">
         {children}
       </Box>

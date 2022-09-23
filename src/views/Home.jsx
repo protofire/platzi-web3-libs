@@ -22,7 +22,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 import { AppContext } from "../context/AppContext";
 import useProposalStatus from "../hooks/useProposalStatus";
-// import { GoOctoface } from "react-icons/go";
+import { GoOctoface } from "react-icons/go";
 
 const Home = () => {
   const { active } = useWeb3React();
@@ -85,7 +85,7 @@ const Home = () => {
               isExternal
             >
               <Button
-                // leftIcon={<GoOctoface />}
+                leftIcon={<GoOctoface />}
                 size={"lg"}
                 fontWeight={"normal"}
                 px={6}
