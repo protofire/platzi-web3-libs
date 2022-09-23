@@ -29,12 +29,9 @@ const NavLink = () => {
     mx="auto"
     maxW={"7xl"}
     width="100%"
-    bg={useColorModeValue("white", "gray.800")}
     px={4}
   >
     <Flex
-      bg={useColorModeValue("white", "gray.800")}
-      color={useColorModeValue("gray.600", "white")}
       minH={"60px"}
       py={{ base: 2 }}
       px={{ base: 4 }}
@@ -54,7 +51,7 @@ const NavLink = () => {
       <HStack spacing={8} alignItems={"center"}>
         <Flex alignItems="center">
           <Image src={platziLogo} width="80px" />
-          <Heading size="md" color="green" mt={0.2} ml={1}>
+          <Heading size="md" color="purple.400" mt={0.2} ml={1}>
             Challenge
           </Heading>
         </Flex>

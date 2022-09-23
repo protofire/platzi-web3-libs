@@ -9,4 +9,8 @@ const useTruncatedAddress = (account) => {
   return truncated;
 };
 
+export const usePercent = (part, all) => {
+  return ((part / all) * 100).toFixed(2);
+};
+
 export default useTruncatedAddress;

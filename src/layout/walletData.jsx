@@ -74,7 +74,7 @@ const WalletData = () => {
           onClick={connect}
           disabled={isUnsupportedChain}
         >
-          {isUnsupportedChain ? "Red no soportada" : "Conectar wallet"}
+          {isUnsupportedChain ? "Net is not sopported" : "Conect your wallet"}
         </Button>
       )}
     </Flex>

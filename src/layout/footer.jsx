@@ -9,10 +9,7 @@ import {
 
 const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue("white", "gray.800")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
+    <Box>
       <Box
         borderTopWidth={1}
         borderStyle={"solid"}
@@ -29,7 +26,11 @@ const Footer = () => {
         >
           <Text>
             © {new Date().getFullYear()} Original resolved by
-            <Link ml={1} href="https://twitter.com/pablostanley">
+            <Link
+              ml={1}
+              href='https://github.com/IvySaskia'
+              isExternal
+            >
               Ivy Saskia
             </Link>
           </Text>

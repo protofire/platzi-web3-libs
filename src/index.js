@@ -6,19 +6,23 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Web3ReactProvider } from "@web3-react/core";
 import { getLibrary } from "./config/web3";
 import { HashRouter } from "react-router-dom";
+import AppContextProvider from "./context/AppContext";
+import theme from './config/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
   <React.StrictMode>
-    <HashRouter>
-      <ChakraProvider>
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <App />
-        </Web3ReactProvider>
-      </ChakraProvider>
-    </HashRouter>
+    <AppContextProvider>
+      <HashRouter>
+        <ChakraProvider theme={theme}>
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <App />
+          </Web3ReactProvider>
+        </ChakraProvider>
+      </HashRouter>
+    </AppContextProvider>
   </React.StrictMode>
 );
 
