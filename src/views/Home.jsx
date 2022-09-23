@@ -22,7 +22,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 import { AppContext } from "../context/AppContext";
 import useProposalStatus from "../hooks/useProposalStatus";
-import { AiFillAccountBook } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 
 const Home = () => {
   const { active } = useWeb3React();
@@ -74,7 +74,7 @@ const Home = () => {
             </Highlight>
           </Text>
           <Text color={"purple.500"}>
-            You can switch between WEB3.JS and ETHERS.JSlibraries and everything work the same.
+            You can switch between WEB3.JS and ETHERS.JS libraries and everything work the same.
           </Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}
@@ -85,7 +85,7 @@ const Home = () => {
               isExternal
             >
               <Button
-                leftIcon={<AiFillAccountBook />}
+                leftIcon={<AiFillGithub />}
                 size={"lg"}
                 fontWeight={"normal"}
                 px={6}
