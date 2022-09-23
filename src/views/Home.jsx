@@ -22,7 +22,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CheckCircleIcon, CloseIcon } from "@chakra-ui/icons";
 import { AppContext } from "../context/AppContext";
 import useProposalStatus from "../hooks/useProposalStatus";
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/Ai";
 
 const Home = () => {
   const { active } = useWeb3React();
@@ -81,7 +81,7 @@ const Home = () => {
             direction={{ base: "column", sm: "row" }}
           >
             <Link
-              href='https://github.com/IvySaskia/platzi-web3-libs.git'
+              href='https://github.com/IvySaskia/platzi-web3-libs/tree/dev'
               isExternal
             >
               <Button
