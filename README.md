@@ -11,7 +11,7 @@ A #EthDevProgram challenge by Platzi, a DApp that allows people to vote on a (bi
   - [Author](#author)
 
 ## Demo
-The app consist only of a frontend. It work in Görli and with MetaMask. 
+The app consist only of a frontend. It work in Göerli and with MetaMask. 
 
 The contract is already deployed at `0xacfc7725527ba2ee4311574f65e5d76f9f9585e9`. You can see it [here](https://goerli.etherscan.io/address/0xacfc7725527ba2ee4311574f65e5d76f9f9585e9#code).
 
